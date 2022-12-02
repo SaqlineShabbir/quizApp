@@ -35,6 +35,7 @@ const userSlice = createSlice({
     },
     userLoggedOut: (state) => {
       state.loggedInUser = undefined;
+      localStorage.removeItem('loggedInUser');
     },
   },
   extraReducers: (builder) => {

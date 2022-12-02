@@ -1,0 +1,37 @@
+[
+  {
+    "uniqueId": "java10",
+
+    "questions": [
+      {
+        "title": "How is Javascript?",
+        "photo": "https://i.ibb.co/4VhtcvN/json-server.png",
+        "options": [
+          "javascript is good, javascript is bad, javascript is awesome"
+        ]
+      },
+      {
+        "title": "How is React?",
+        "photo": "https://i.ibb.co/4VhtcvN/json-server.png",
+        "options": ["React is good, React is bad, React is awesome"]
+      }
+    ]
+  },
+
+  {
+    "uniqueId": "React10",
+
+    "questions": [
+      {
+        "title": "How is React?",
+        "photo": "https://i.ibb.co/4VhtcvN/json-server.png",
+        "options": ["React is good, React is bad, React is awesome"]
+      },
+      {
+        "title": "How is redux?",
+        "photo": "https://i.ibb.co/4VhtcvN/json-server.png",
+        "options": ["redux is good, redux is bad, redux is awesome"]
+      }
+    ]
+  }
+]

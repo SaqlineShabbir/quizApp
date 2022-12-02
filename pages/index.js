@@ -2,7 +2,6 @@ import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useSelector } from 'react-redux';
 import Login from '../components/login';
-import Header from '../components/QuizUser/Header';
 import useAuthCheck from '../hooks/useAuthCheck';
 export default function Home() {
   const { data: session } = useSession();
@@ -12,8 +11,8 @@ export default function Home() {
   return !authChecked ? (
     <div>Checking Authentication...</div>
   ) : (
-    <div className="h-screen  bg-gray-100 overflow-hidden">
-      {authChecked ? (
+    <div className="h-screen  bg-gray-100 ">
+      {loggedInUser ? (
         <div>
           <Head>
             <title>Quiz App</title>
@@ -21,13 +20,7 @@ export default function Home() {
             <link rel="icon" href="/favicon.ico" />
           </Head>
 
-          <main className="">
-            <Header />
-            <p>This Is Home Page</p>
-            {/* <button className="border px-5 py-4" onClick={signOut}>
-              Sign Out{' '}
-            </button> */}
-          </main>
+          <main className="bg-white"></main>
         </div>
       ) : (
         <Login />
