@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../redux/features/users/userSlice';
-const register = () => {
+const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -108,4 +108,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

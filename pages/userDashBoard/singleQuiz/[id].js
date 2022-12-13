@@ -25,11 +25,9 @@ import { fetchQuestion } from '../../../redux/features/questions/questionSlice';
 //       return state;
 //   }
 // };
-const singleQuiz = () => {
+const SingleQuiz = () => {
   const router = useRouter();
   const id = router.query.id;
-
-  //
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchQuestion(id));
@@ -117,4 +115,4 @@ const singleQuiz = () => {
   );
 };
 
-export default singleQuiz;
+export default SingleQuiz;

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import img from '../../assets/images/Cap.PNG';
 import DashboardLayout from '../../components/dashboard/layout';
 import { fetchQuiz } from '../../redux/features/quizs/quizSlice';
-const quizDetails = () => {
+const QuizDetails = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchQuiz());
@@ -96,4 +96,4 @@ const quizDetails = () => {
   );
 };
 
-export default quizDetails;
+export default QuizDetails;
