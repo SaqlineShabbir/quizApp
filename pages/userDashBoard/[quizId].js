@@ -7,7 +7,7 @@ import DashboardLayout from '../../components/dashboard/layout';
 import useAuth from '../../hooks/useAuth';
 const QuizDetails = ({ data }) => {
   const { right } = useAuth();
-  console.log('rightttt', right);
+
   const router = useRouter();
   const quizId = router.query.quizId;
 

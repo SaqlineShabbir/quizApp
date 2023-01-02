@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUser } from '../redux/features/users/userSlice';
-const register = () => {
+import useAuth from '../hooks/useAuth';
+const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -10,6 +10,8 @@ const register = () => {
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.user);
+
+  const { postUser } = useAuth();
   //user already exists or not
   const isExist = users[0]?.data?.message;
   console.log(users);
@@ -22,13 +24,18 @@ const register = () => {
     if (password !== ConfirmPassword) {
       setError('Password does not match');
     } else {
-      dispatch(
-        createUser({
-          name,
-          email,
-          password,
-        })
-      );
+      postUser({
+        name,
+        email,
+        password,
+      });
+      // dispatch(
+      //   createUser({
+      //     name,
+      //     email,
+      //     password,
+      //   })
+      // );
     }
     if (isExist) {
       setError('Email already exists');
@@ -108,4 +115,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

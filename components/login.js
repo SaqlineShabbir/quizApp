@@ -4,15 +4,18 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../redux/features/users/userSlice';
+import useAuth from '../hooks/useAuth';
+// import { loginUser } from '../redux/features/users/userSlice';
 
-const login = () => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const router = useRouter();
+  const { loginUser } = useAuth();
+
   const { data: session } = useSession();
   console.log(session?.user);
   const handleGoogleSignIn = (e) => {
@@ -20,12 +23,12 @@ const login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      loginUser({
-        email,
-        password,
-      })
-    );
+    // dispatch(
+    loginUser({
+      email,
+      password,
+    });
+    // );
   };
 
   return (
