@@ -4,9 +4,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import img from '../../assets/images/Cap.PNG';
 import DashboardLayout from '../../components/dashboard/layout';
+import useAuth from '../../hooks/useAuth';
 const QuizDetails = ({ data }) => {
-  console.log('lol', data);
-
+  const { right } = useAuth();
+  console.log('rightttt', right);
   const router = useRouter();
   const quizId = router.query.quizId;
 
