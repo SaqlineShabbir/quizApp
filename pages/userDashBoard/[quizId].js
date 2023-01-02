@@ -1,23 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import img from '../../assets/images/Cap.PNG';
 import DashboardLayout from '../../components/dashboard/layout';
-import { fetchQuiz } from '../../redux/features/quizs/quizSlice';
-const quizDetails = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchQuiz());
-  }, [dispatch]);
+const QuizDetails = ({ data }) => {
+  console.log('lol', data);
+
   const router = useRouter();
   const quizId = router.query.quizId;
-  const { allQuiz } = useSelector((state) => state.quiz);
 
-  const singleQuiz = allQuiz?.data?.find((q) => q.quizId === quizId);
-  console.log(singleQuiz);
-
+  const singleQuiz = data.find((q) => q.quizId === quizId);
+  console.log('sing', singleQuiz);
   return (
     <DashboardLayout>
       <div className="border h-[88vh]  p-5">
@@ -96,4 +90,13 @@ const quizDetails = () => {
   );
 };
 
-export default quizDetails;
+export default QuizDetails;
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch('http://localhost:3000/api/quiz');
+  const data = await res.json();
+
+  // Pass data to the page via props
+  return { props: { data } };
+}

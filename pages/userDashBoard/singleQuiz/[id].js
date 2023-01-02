@@ -5,27 +5,8 @@ import Option from '../../../components/dashboard/quizUser/questions/Option';
 import ProgressBar from '../../../components/dashboard/quizUser/questions/ProgressBar';
 import { fetchQuestion } from '../../../redux/features/questions/questionSlice';
 
-//   useReducer
-// const initialState = null;
-// const reducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     case 'questions':
-//       action?.value?.forEach((question) => {
-//         question?.options?.forEach((option) => {
-//           option.checked = false;
-//         });
-//       });
-//       return action.value;
-//     case 'answer':
-//       const questions = _.cloneDeep(state);
-//       questions[action.questionId].options[action.optionIndex].checked =
-//         action.value;
-//       return questions;
-//     default:
-//       return state;
-//   }
-// };
-const singleQuiz = () => {
+const SingleQuiz = ({ data }) => {
+  console.log('dattta', data);
   const router = useRouter();
   const id = router.query.id;
 
@@ -59,8 +40,6 @@ const singleQuiz = () => {
       setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion + 1);
       localStorage.setItem('current', currentQuestion);
     }
-
-    console.log('......', localStorage.getItem('current'));
   };
   // handle when user clicks previous question
   const prevQuestion = () => {
@@ -117,4 +96,12 @@ const singleQuiz = () => {
   );
 };
 
-export default singleQuiz;
+export default SingleQuiz;
+export async function getServerSideProps(context) {
+  console.log('context', context);
+  const { id } = context.query;
+  const res = await fetch(`http://localhost:3000/api/question?quizId=${id}`);
+
+  const data = await res.json();
+  return { props: { data } };
+}

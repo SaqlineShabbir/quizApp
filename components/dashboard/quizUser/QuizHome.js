@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchQuiz } from '../../../redux/features/quizs/quizSlice';
 import Quiz from './Quiz';
 
-const QuizHome = () => {
+const QuizHome = ({ data }) => {
+  console.log('okkk', data);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchQuiz());
@@ -31,3 +32,11 @@ const QuizHome = () => {
 };
 
 export default QuizHome;
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch.get('/api/quiz');
+  const data = await res.json();
+
+  // Pass data to the page via props
+  return { props: { data } };
+}

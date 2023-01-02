@@ -9,7 +9,6 @@ export default function ProgressBar({ progress }) {
   function toggleTooltip() {
     if (tooltip) {
       setTooltip(false);
-      tooltipRef.current.style.display = 'none';
     } else {
       setTooltip(true);
       tooltipRef.current.style.left = `calc(${progress}% - 65px)`;
