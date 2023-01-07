@@ -1,28 +1,31 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import ProgressBar from '../../../components/dashboard/quizUser/questions/ProgressBar';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 
 const SingleQuiz = ({ categoryData }) => {
+  const [currentQuiz, setCurrentQuiz] = useLocalStorage('currentQuiz', 0);
   const router = useRouter();
   const id = router.query.id;
-
+  console.log('currentquiz', currentQuiz);
   //
   const singleQuiz = categoryData.find((q) => q._id === id);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
-
+  console.log(currentQuestion, 'currentQuestion');
   // handle when user clicks next question
   const nextQuestion = () => {
     if (currentQuestion <= singleQuiz?.quizs?.length - 1) {
       setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion + 1);
-      localStorage.setItem('current', currentQuestion);
+      setCurrentQuiz((prev) => prev + 1);
     }
   };
   // handle when user clicks previous question
   const prevQuestion = () => {
     if (currentQuestion >= 0 && currentQuestion <= singleQuiz?.quizs.length) {
       setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion - 1);
-      localStorage.setItem('current', currentQuestion);
+
+      setCurrentQuiz((prev) => prev - 1);
     }
   };
 
@@ -39,19 +42,19 @@ const SingleQuiz = ({ categoryData }) => {
       <div>
         <div className="border mx-40 my-10 p-20">
           <ProgressBar progress={percentage} />
-          <p>Question: {singleQuiz?.quizs[currentQuestion]?.question}?</p>
+          <p>Question: {singleQuiz?.quizs[currentQuiz]?.question}?</p>
           <div className="py-3  space-y-3">
             <p className="border rounded p-2 bg-blue-50">
-              1. {singleQuiz?.quizs[currentQuestion]?.a}
+              1. {singleQuiz?.quizs[currentQuiz]?.a}
             </p>
             <p className="border rounded p-2 bg-blue-50">
-              2. {singleQuiz?.quizs[currentQuestion]?.b}
+              2. {singleQuiz?.quizs[currentQuiz]?.b}
             </p>
             <p className="border rounded p-2 bg-blue-50">
-              3. {singleQuiz?.quizs[currentQuestion]?.c}
+              3. {singleQuiz?.quizs[currentQuiz]?.c}
             </p>
             <p className="border rounded p-2 bg-blue-50">
-              4. {singleQuiz?.quizs[currentQuestion]?.d}
+              4. {singleQuiz?.quizs[currentQuiz]?.d}
             </p>
           </div>
           <div className="flex  justify-between">
