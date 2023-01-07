@@ -5,13 +5,14 @@ import React from 'react';
 import img from '../../assets/images/Cap.PNG';
 import DashboardLayout from '../../components/dashboard/layout';
 import useAuth from '../../hooks/useAuth';
-const QuizDetails = ({ data }) => {
+const QuizDetails = ({ categoryData }) => {
+  console.log(categoryData);
   const { right } = useAuth();
 
   const router = useRouter();
   const quizId = router.query.quizId;
 
-  const singleQuiz = data.find((q) => q.quizId === quizId);
+  const singleQuiz = categoryData.find((q) => q._id === quizId);
   console.log('sing', singleQuiz);
   return (
     <DashboardLayout>
@@ -95,9 +96,12 @@ export default QuizDetails;
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch('http://localhost:3000/api/quiz');
-  const data = await res.json();
+  const res = await fetch(
+    'https://quiz-app-backend-production-f258.up.railway.app/category/all'
+  );
+  const categoryData = await res.json();
+  console.log(categoryData);
 
   // Pass data to the page via props
-  return { props: { data } };
+  return { props: { categoryData } };
 }

@@ -11,8 +11,8 @@ export default function ProgressBar({ progress }) {
       setTooltip(false);
     } else {
       setTooltip(true);
-      tooltipRef.current.style.left = `calc(${progress}% - 65px)`;
-      tooltipRef.current.style.display = 'block';
+      // tooltipRef.current.style.left = `calc(${progress}% - 65px)`;
+      // tooltipRef.current.style.display = 'block';
     }
   }
 

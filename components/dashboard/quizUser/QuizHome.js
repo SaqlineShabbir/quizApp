@@ -1,16 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchQuiz } from '../../../redux/features/quizs/quizSlice';
+import React from 'react';
 import Quiz from './Quiz';
 
-const QuizHome = ({ data }) => {
-  console.log('okkk', data);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchQuiz());
-  }, [dispatch]);
+const QuizHome = ({ categoryData }) => {
+  console.log('okkk', categoryData);
 
-  const { allQuiz } = useSelector((state) => state.quiz);
   return (
     <div className="border p-5 h-[88vh]">
       <div className="flex justify-between pb-5">
@@ -23,8 +16,8 @@ const QuizHome = ({ data }) => {
         </button>
       </div>
       <div className="grid grid-cols-5 ">
-        {allQuiz?.data?.map((quiz) => (
-          <Quiz key={quiz._id} quiz={quiz} />
+        {categoryData?.map((quizCategory) => (
+          <Quiz key={quizCategory._id} quizCategory={quizCategory} />
         ))}
       </div>
     </div>
@@ -32,11 +25,3 @@ const QuizHome = ({ data }) => {
 };
 
 export default QuizHome;
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await fetch.get('/api/quiz');
-  const data = await res.json();
-
-  // Pass data to the page via props
-  return { props: { data } };
-}

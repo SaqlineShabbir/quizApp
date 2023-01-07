@@ -1,19 +1,20 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import img from '../../../assets/images/Cap.PNG';
-const Quiz = ({ quiz }) => {
+
+const Quiz = ({ quizCategory }) => {
+  console.log(quizCategory);
   return (
     <div className="p-3">
-      <Link href={`/userDashBoard/${quiz.quizId}`}>
-        <Image
+      <Link href={`/userDashBoard/${quizCategory._id}`}>
+        {/* <Image
           className="rounded-xl "
           height={200}
           width={172}
           src={img}
           alt=""
-        />
+        /> */}
+
+        <p className=" font-bold cursor-pointer">{quizCategory?.name}</p>
       </Link>
-      <p className=" font-bold">{quiz?.title}</p>
     </div>
   );
 };
