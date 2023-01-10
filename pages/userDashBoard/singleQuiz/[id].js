@@ -1,116 +1,95 @@
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import ProgressBar from '../../../components/dashboard/quizUser/questions/ProgressBar';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
+import { useReducer } from "react";
+import ProgressBar from "../../../components/dashboard/quizUser/questions/ProgressBar";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
+const reducer = (state, action) => {
+  console.log(action.payLoad.selectAnswer);
+  switch (action.type) {
+    case "ANSWERED":
+      return state.map((question) => {
+        if (question._id === action.payLoad.id) {
+          return { ...question, selectAnswer: action.payLoad.selectAnswer };
+        } else {
+          return question;
+        }
+      });
+    default:
+      return state;
+  }
+};
 const SingleQuiz = ({ categoryData }) => {
-  const [currentQuiz, setCurrentQuiz] = useLocalStorage('currentQuiz', 0);
-  const router = useRouter();
-  const id = router.query.id;
-  console.log('currentquiz', currentQuiz);
-  //
-  const singleQuiz = categoryData.find((q) => q._id === id);
-
   const [currentQuestion, setCurrentQuestion] = useState(0);
   // get selected answer
-  const [selected, setSelected] = useState('');
-  console.log('selected', selected);
-  console.log(currentQuestion, 'currentQuestion');
-  // handle when user clicks next question
+  const [selected, setSelected] = useState("");
+  const initialQuestions = categoryData[0]?.quizs;
+  const [questions, dispatch] = useReducer(reducer, initialQuestions);
+  const handleAnswer = (id, selectAnswer) => {
+    dispatch({
+      type: "ANSWERED",
+      payLoad: { id: id, selectAnswer: selectAnswer },
+    });
+  };
+
+  //handle when user clicks next question
   const nextQuestion = () => {
-    if (currentQuestion <= singleQuiz?.quizs?.length - 1) {
+    if (currentQuestion < questions.length) {
       setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion + 1);
-      setCurrentQuiz((prev) => prev + 1);
     }
   };
   // handle when user clicks previous question
   const prevQuestion = () => {
-    if (currentQuestion >= 0 && currentQuestion <= singleQuiz?.quizs.length) {
+    if (currentQuestion >= 0) {
       setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion - 1);
-
-      setCurrentQuiz((prev) => prev - 1);
     }
   };
 
-  console.log(singleQuiz?.quizs[currentQuestion]);
-
-  //calculate percentage
+  // calculate percentage
   const percentage =
-    singleQuiz.quizs.length > 0
-      ? ((currentQuestion + 1) / singleQuiz.quizs.length) * 100
-      : 0;
+    questions.length > 0 ? ((currentQuestion + 1) / questions.length) * 100 : 0;
 
-  console.log('currentQ', currentQuestion);
-  console.log('length', singleQuiz?.quizs.length);
   //handleAnswer
+  console.log(questions);
+
+  //handle result
+
+  useEffect(() => {
+    localStorage.setItem("questions", JSON.stringify(questions));
+  }, [questions]);
 
   return (
     <>
       <div>
         <div className="border mx-40 my-10 p-20">
           <ProgressBar progress={percentage} />
-          <p>Question: {singleQuiz?.quizs[currentQuestion]?.question}?</p>
+          <p>Question: {questions[currentQuestion]?.question}?</p>
           <div className="py-3  space-y-3">
-            <p
-              onClick={() => setSelected('a')}
-              className={`${
-                (selected === 'a' &&
-                singleQuiz.quizs[currentQuestion].correctAnswer === selected
-                  ? 'bg-green-400'
-                  : 'bg-blue-50',
-                selected === 'a' &&
-                singleQuiz.quizs[currentQuestion].correctAnswer != selected
-                  ? 'bg-red-300'
-                  : 'bg-blue-50')
-              } border rounded p-2`}
+            <div
+              onClick={() => handleAnswer(questions[currentQuestion]?._id, "a")}
+              className="bg-slate-50"
             >
-              1. {singleQuiz?.quizs[currentQuestion]?.a}
-            </p>
-            <p
-              className={`${
-                (singleQuiz.quizs[currentQuestion].correctAnswer === selected &&
-                selected === 'b'
-                  ? 'bg-green-400'
-                  : 'bg-blue-50',
-                selected === 'b' &&
-                singleQuiz.quizs[currentQuestion].correctAnswer != selected
-                  ? 'bg-red-300'
-                  : 'bg-blue-50')
-              } border rounded p-2`}
-              onClick={() => setSelected('b')}
+              a. {questions[currentQuestion]?.a}
+            </div>
+            <div
+              onClick={() => handleAnswer(questions[currentQuestion]?._id, "b")}
+              className="bg-slate-50"
             >
-              2. {singleQuiz?.quizs[currentQuestion]?.b}
-            </p>
-            <p
-              className={`${
-                (singleQuiz.quizs[currentQuestion].correctAnswer === selected &&
-                selected === 'c'
-                  ? 'bg-green-400'
-                  : 'bg-blue-50',
-                selected === 'c' &&
-                singleQuiz.quizs[currentQuestion].correctAnswer != selected
-                  ? 'bg-red-300'
-                  : 'bg-blue-50')
-              } border rounded p-2`}
-              onClick={() => setSelected('c')}
+              b. {questions[currentQuestion]?.b}
+            </div>
+            <div
+              onClick={() => handleAnswer(questions[currentQuestion]?._id, "c")}
+              className="bg-slate-50"
             >
-              3. {singleQuiz?.quizs[currentQuestion]?.c}
-            </p>
-            <p
-              className={`${
-                (singleQuiz.quizs[currentQuestion].correctAnswer === selected &&
-                selected === 'd'
-                  ? 'bg-green-400'
-                  : 'bg-blue-50',
-                selected === 'd' &&
-                singleQuiz.quizs[currentQuestion].correctAnswer != selected
-                  ? 'bg-red-300'
-                  : 'bg-blue-50')
-              } border rounded p-2`}
-              onClick={() => setSelected('d')}
+              c. {questions[currentQuestion]?.c}
+            </div>
+            <div
+              onClick={() => handleAnswer(questions[currentQuestion]?._id, "d")}
+              className="bg-slate-50"
             >
-              4. {singleQuiz?.quizs[currentQuestion]?.d}
-            </p>
+              d. {questions[currentQuestion]?.d}
+            </div>
           </div>
           <div className="flex  justify-between">
             <button
@@ -121,13 +100,22 @@ const SingleQuiz = ({ categoryData }) => {
               Previous
             </button>
             <button
-              disabled={currentQuestion === singleQuiz.quizs.length}
+              disabled={currentQuestion === questions.length - 1}
               className="bg-orange-400 border  px-3 py-1 rounded-xl"
               onClick={nextQuestion}
             >
               next
             </button>
           </div>
+          {currentQuestion === questions.length - 1 && (
+            <div className="flex justify-center">
+              <Link href={"/userDashBoard/result"}>
+                <button className="bg-orange-400 border  px-3 py-1 rounded-xl">
+                  Show Result
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </>
@@ -135,13 +123,12 @@ const SingleQuiz = ({ categoryData }) => {
 };
 
 export default SingleQuiz;
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   // Fetch data from external API
   const res = await fetch(
-    'https://quiz-app-backend-production-f258.up.railway.app/category/all'
+    `https://quiz-app-backend-production-f258.up.railway.app/category/${context.query.id}`
   );
   const categoryData = await res.json();
-  console.log(categoryData);
 
   // Pass data to the page via props
   return { props: { categoryData } };
