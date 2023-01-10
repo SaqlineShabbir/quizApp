@@ -9,6 +9,7 @@ const PostQuiz = ({ categoryData }) => {
 
   //post data to server
   const onSubmit = async (data) => {
+    console.log('posting', data);
     try {
       const res = await axios.post(
         `https://quiz-app-backend-production-f258.up.railway.app/quiz/addquiz/${categoryId}`,
@@ -76,7 +77,7 @@ const PostQuiz = ({ categoryData }) => {
             <input
               className="p-3  border"
               placeholder="Correct Answer"
-              {...register('Correct Answer', { required: true })}
+              {...register('correctAnswer', { required: true })}
             />
             <br />
             <input

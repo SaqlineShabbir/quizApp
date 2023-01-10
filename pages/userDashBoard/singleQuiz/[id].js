@@ -12,6 +12,9 @@ const SingleQuiz = ({ categoryData }) => {
   const singleQuiz = categoryData.find((q) => q._id === id);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  // get selected answer
+  const [selected, setSelected] = useState('');
+  console.log('selected', selected);
   console.log(currentQuestion, 'currentQuestion');
   // handle when user clicks next question
   const nextQuestion = () => {
@@ -29,6 +32,8 @@ const SingleQuiz = ({ categoryData }) => {
     }
   };
 
+  console.log(singleQuiz?.quizs[currentQuestion]);
+
   //calculate percentage
   const percentage =
     singleQuiz.quizs.length > 0
@@ -37,24 +42,74 @@ const SingleQuiz = ({ categoryData }) => {
 
   console.log('currentQ', currentQuestion);
   console.log('length', singleQuiz?.quizs.length);
+  //handleAnswer
+
   return (
     <>
       <div>
         <div className="border mx-40 my-10 p-20">
           <ProgressBar progress={percentage} />
-          <p>Question: {singleQuiz?.quizs[currentQuiz]?.question}?</p>
+          <p>Question: {singleQuiz?.quizs[currentQuestion]?.question}?</p>
           <div className="py-3  space-y-3">
-            <p className="border rounded p-2 bg-blue-50">
-              1. {singleQuiz?.quizs[currentQuiz]?.a}
+            <p
+              onClick={() => setSelected('a')}
+              className={`${
+                (selected === 'a' &&
+                singleQuiz.quizs[currentQuestion].correctAnswer === selected
+                  ? 'bg-green-400'
+                  : 'bg-blue-50',
+                selected === 'a' &&
+                singleQuiz.quizs[currentQuestion].correctAnswer != selected
+                  ? 'bg-red-300'
+                  : 'bg-blue-50')
+              } border rounded p-2`}
+            >
+              1. {singleQuiz?.quizs[currentQuestion]?.a}
             </p>
-            <p className="border rounded p-2 bg-blue-50">
-              2. {singleQuiz?.quizs[currentQuiz]?.b}
+            <p
+              className={`${
+                (singleQuiz.quizs[currentQuestion].correctAnswer === selected &&
+                selected === 'b'
+                  ? 'bg-green-400'
+                  : 'bg-blue-50',
+                selected === 'b' &&
+                singleQuiz.quizs[currentQuestion].correctAnswer != selected
+                  ? 'bg-red-300'
+                  : 'bg-blue-50')
+              } border rounded p-2`}
+              onClick={() => setSelected('b')}
+            >
+              2. {singleQuiz?.quizs[currentQuestion]?.b}
             </p>
-            <p className="border rounded p-2 bg-blue-50">
-              3. {singleQuiz?.quizs[currentQuiz]?.c}
+            <p
+              className={`${
+                (singleQuiz.quizs[currentQuestion].correctAnswer === selected &&
+                selected === 'c'
+                  ? 'bg-green-400'
+                  : 'bg-blue-50',
+                selected === 'c' &&
+                singleQuiz.quizs[currentQuestion].correctAnswer != selected
+                  ? 'bg-red-300'
+                  : 'bg-blue-50')
+              } border rounded p-2`}
+              onClick={() => setSelected('c')}
+            >
+              3. {singleQuiz?.quizs[currentQuestion]?.c}
             </p>
-            <p className="border rounded p-2 bg-blue-50">
-              4. {singleQuiz?.quizs[currentQuiz]?.d}
+            <p
+              className={`${
+                (singleQuiz.quizs[currentQuestion].correctAnswer === selected &&
+                selected === 'd'
+                  ? 'bg-green-400'
+                  : 'bg-blue-50',
+                selected === 'd' &&
+                singleQuiz.quizs[currentQuestion].correctAnswer != selected
+                  ? 'bg-red-300'
+                  : 'bg-blue-50')
+              } border rounded p-2`}
+              onClick={() => setSelected('d')}
+            >
+              4. {singleQuiz?.quizs[currentQuestion]?.d}
             </p>
           </div>
           <div className="flex  justify-between">
