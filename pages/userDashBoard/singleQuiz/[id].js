@@ -1,14 +1,11 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
-import { useReducer } from "react";
-import ProgressBar from "../../../components/dashboard/quizUser/questions/ProgressBar";
-import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import Link from 'next/link';
+import React, { useEffect, useReducer, useState } from 'react';
+import ProgressBar from '../../../components/dashboard/quizUser/questions/ProgressBar';
 
 const reducer = (state, action) => {
   console.log(action.payLoad.selectAnswer);
   switch (action.type) {
-    case "ANSWERED":
+    case 'ANSWERED':
       return state.map((question) => {
         if (question._id === action.payLoad.id) {
           return { ...question, selectAnswer: action.payLoad.selectAnswer };
@@ -22,13 +19,14 @@ const reducer = (state, action) => {
 };
 const SingleQuiz = ({ categoryData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+
   // get selected answer
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState('');
   const initialQuestions = categoryData[0]?.quizs;
   const [questions, dispatch] = useReducer(reducer, initialQuestions);
   const handleAnswer = (id, selectAnswer) => {
     dispatch({
-      type: "ANSWERED",
+      type: 'ANSWERED',
       payLoad: { id: id, selectAnswer: selectAnswer },
     });
   };
@@ -56,7 +54,7 @@ const SingleQuiz = ({ categoryData }) => {
   //handle result
 
   useEffect(() => {
-    localStorage.setItem("questions", JSON.stringify(questions));
+    localStorage.setItem('questions', JSON.stringify(questions));
   }, [questions]);
 
   return (
@@ -67,25 +65,25 @@ const SingleQuiz = ({ categoryData }) => {
           <p>Question: {questions[currentQuestion]?.question}?</p>
           <div className="py-3  space-y-3">
             <div
-              onClick={() => handleAnswer(questions[currentQuestion]?._id, "a")}
+              onClick={() => handleAnswer(questions[currentQuestion]?._id, 'a')}
               className="bg-slate-50"
             >
               a. {questions[currentQuestion]?.a}
             </div>
             <div
-              onClick={() => handleAnswer(questions[currentQuestion]?._id, "b")}
+              onClick={() => handleAnswer(questions[currentQuestion]?._id, 'b')}
               className="bg-slate-50"
             >
               b. {questions[currentQuestion]?.b}
             </div>
             <div
-              onClick={() => handleAnswer(questions[currentQuestion]?._id, "c")}
+              onClick={() => handleAnswer(questions[currentQuestion]?._id, 'c')}
               className="bg-slate-50"
             >
               c. {questions[currentQuestion]?.c}
             </div>
             <div
-              onClick={() => handleAnswer(questions[currentQuestion]?._id, "d")}
+              onClick={() => handleAnswer(questions[currentQuestion]?._id, 'd')}
               className="bg-slate-50"
             >
               d. {questions[currentQuestion]?.d}
@@ -109,7 +107,7 @@ const SingleQuiz = ({ categoryData }) => {
           </div>
           {currentQuestion === questions.length - 1 && (
             <div className="flex justify-center">
-              <Link href={"/userDashBoard/result"}>
+              <Link href={'/userDashBoard/result'}>
                 <button className="bg-orange-400 border  px-3 py-1 rounded-xl">
                   Show Result
                 </button>

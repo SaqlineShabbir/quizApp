@@ -11,9 +11,11 @@ const QuizHome = ({ categoryData }) => {
           <p className="text-2xl  font-bold">Select Quiz Topic for Test</p>
           <p className="pb-4">Featured Categories</p>
         </div>
-        <button className="lg:px-14 bg-orange-500  rounded-full">
-          Explore All Categories
-        </button>
+        <div>
+          <button className="border bg-gradient-to-l from-[#FF6961] rounded-full lg:px-5 lg:py-3">
+            Explore All Categories
+          </button>
+        </div>
       </div>
       <div className="grid grid-cols-5 ">
         {categoryData?.map((quizCategory) => (

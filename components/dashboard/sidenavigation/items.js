@@ -5,9 +5,9 @@ import { useToggle } from '../provider/context';
 import data from './data';
 
 const style = {
-  title: `mx-4 text-sm`,
+  title: `mx-4 text-sm text-black`,
   active: ` rounded-full`,
-  link: `flex items-center justify-start my-1 py-2 my-4  px-5 w-full hover:text-orange`,
+  link: `flex items-center justify-start my-1 py-2 my-4  px-5 w-full `,
   close: `sm:duration-700 sm:ease-out sm:invisible sm:opacity-0 sm:transition-all`,
   open: `sm:duration-500 sm:ease-in lg:h-auto sm:opacity-100 sm:transition-all sm:w-auto`,
 };
@@ -29,18 +29,16 @@ export default function SidenavItems() {
         {data.map((item) => (
           <Link href={item.link} key={item.title}>
             <a
-              className={`${style.link} active:bg-orange-500 hover:bg-orange-500 rounded-full`}
+              className={`${style.link} active:bg-orange-500 hover:bg-orange-500 rounded-full text-black`}
             >
               <div
-                className={`p-2 ${item.link === asPath ? style.active : ''}`}
+                className={`p-2 ${
+                  item.link === asPath ? style.active : ''
+                } text-black`}
               >
                 <span>{item.icon}</span>
               </div>
-              <span
-                className={`${style.title} ${open ? style.open : style.close}`}
-              >
-                {item.title}
-              </span>
+              <span className="text-black">{item.title}</span>
             </a>
           </Link>
         ))}
