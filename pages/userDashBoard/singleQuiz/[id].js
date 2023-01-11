@@ -38,11 +38,11 @@ const SingleQuiz = ({ categoryData }) => {
     }
   };
   // handle when user clicks previous question
-  const prevQuestion = () => {
-    if (currentQuestion >= 0) {
-      setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion - 1);
-    }
-  };
+  // const prevQuestion = () => {
+  //   if (currentQuestion >= 0) {
+  //     setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion - 1);
+  //   }
+  // };
 
   // calculate percentage
   const percentage =
@@ -60,60 +60,65 @@ const SingleQuiz = ({ categoryData }) => {
   return (
     <>
       <div>
-        <div className="border mx-40 my-10 p-20">
+        <div className="border border-[#FFAE96] rounded lg:mx-40 mx-5 my-10 lg:p-20 p-5">
           <ProgressBar progress={percentage} />
           <p>Question: {questions[currentQuestion]?.question}?</p>
           <div className="py-3  space-y-3">
             <div
               onClick={() => handleAnswer(questions[currentQuestion]?._id, 'a')}
-              className="bg-slate-50"
+              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2"
             >
-              a. {questions[currentQuestion]?.a}
+              {questions[currentQuestion]?.a}
             </div>
             <div
               onClick={() => handleAnswer(questions[currentQuestion]?._id, 'b')}
-              className="bg-slate-50"
+              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2"
             >
-              b. {questions[currentQuestion]?.b}
+              {questions[currentQuestion]?.b}
             </div>
             <div
               onClick={() => handleAnswer(questions[currentQuestion]?._id, 'c')}
-              className="bg-slate-50"
+              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2"
             >
-              c. {questions[currentQuestion]?.c}
+              {questions[currentQuestion]?.c}
             </div>
             <div
               onClick={() => handleAnswer(questions[currentQuestion]?._id, 'd')}
-              className="bg-slate-50"
+              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2"
             >
-              d. {questions[currentQuestion]?.d}
+              {questions[currentQuestion]?.d}
             </div>
+            <hr className="mt-20" />
           </div>
-          <div className="flex  justify-between">
-            <button
+
+          <div className="flex  justify-end">
+            {/* <button
               disabled={currentQuestion <= 0}
               className="bg-orange-400 border px-3  py-1 rounded-xl"
               onClick={prevQuestion}
             >
               Previous
-            </button>
-            <button
-              disabled={currentQuestion === questions.length - 1}
-              className="bg-orange-400 border  px-3 py-1 rounded-xl"
-              onClick={nextQuestion}
-            >
-              next
-            </button>
-          </div>
-          {currentQuestion === questions.length - 1 && (
-            <div className="flex justify-center">
+            </button> */}
+            {currentQuestion === questions.length - 1 ? (
               <Link href={'/userDashBoard/result'}>
-                <button className="bg-orange-400 border  px-3 py-1 rounded-xl">
+                <button className="bg-gradient-to-l from-[#FF6961] border  px-3 py-1 rounded-xl">
                   Show Result
                 </button>
               </Link>
-            </div>
-          )}
+            ) : (
+              <button
+                disabled={currentQuestion === questions.length - 1}
+                className="border border-[#FFAE96]  px-10 py-1 rounded-xl"
+                onClick={nextQuestion}
+              >
+                next
+              </button>
+            )}
+          </div>
+          <p className="pt-10">
+            <span className="font-bold">{currentQuestion + 1}</span> Out Of{' '}
+            <span className="font-bold">{questions.length}</span> Questions
+          </p>
         </div>
       </div>
     </>
