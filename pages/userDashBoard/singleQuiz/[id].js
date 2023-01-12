@@ -3,7 +3,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 import ProgressBar from '../../../components/dashboard/quizUser/questions/ProgressBar';
 
 const reducer = (state, action) => {
-  console.log(action.payLoad.selectAnswer);
+  // console.log(action.payLoad.selectAnswer);
   switch (action.type) {
     case 'ANSWERED':
       return state.map((question) => {
@@ -48,11 +48,7 @@ const SingleQuiz = ({ categoryData }) => {
   const percentage =
     questions.length > 0 ? ((currentQuestion + 1) / questions.length) * 100 : 0;
 
-  //handleAnswer
-  console.log(questions);
-
   //handle result
-
   useEffect(() => {
     localStorage.setItem('questions', JSON.stringify(questions));
   }, [questions]);
