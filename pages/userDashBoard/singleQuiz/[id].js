@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import React, { useEffect, useReducer, useState } from 'react';
+import { router } from 'next/router';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import ProgressBar from '../../../components/dashboard/quizUser/questions/ProgressBar';
 
 const reducer = (state, action) => {
@@ -19,6 +20,10 @@ const reducer = (state, action) => {
 };
 const SingleQuiz = ({ categoryData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  //timer
+  const [seconds, setSeconds] = useState(30);
+  const [countDown, setCountDown] = useState(30);
+  const timerId = useRef();
 
   // get selected answer
   const [selected, setSelected] = useState('');
@@ -36,6 +41,7 @@ const SingleQuiz = ({ categoryData }) => {
     if (currentQuestion < questions.length) {
       setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion + 1);
     }
+    setCountDown(30);
   };
   // handle when user clicks previous question
   // const prevQuestion = () => {
@@ -53,10 +59,27 @@ const SingleQuiz = ({ categoryData }) => {
     localStorage.setItem('questions', JSON.stringify(questions));
   }, [questions]);
 
+  // handle timer
+  useEffect(() => {
+    timerId.current = setInterval(() => {
+      setCountDown((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(timerId.current);
+  }, []);
+  useEffect(() => {
+    if (countDown === 0) {
+      clearInterval(timerId.current);
+      router.push('http://localhost:3000//userDashBoard/result');
+    }
+  });
+
   return (
     <>
       <div>
         <div className="border border-[#FFAE96] rounded lg:mx-40 mx-5 my-10 lg:p-20 p-5">
+          <div className="flex justify-end text-2xl  pb-4">
+            <p>Timer: {countDown}</p>
+          </div>
           <ProgressBar progress={percentage} />
           <p>Question: {questions[currentQuestion]?.question}?</p>
           <div className="py-3  space-y-3">
