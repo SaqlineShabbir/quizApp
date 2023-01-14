@@ -1,18 +1,20 @@
-import axios from "axios";
-import React from "react";
-import { useForm } from "react-hook-form";
-import FileBase64 from "react-file-base64";
-import { useState } from "react";
+import axios from 'axios';
+import React, { useState } from 'react';
+import FileBase64 from 'react-file-base64';
+import { useForm } from 'react-hook-form';
 
 const PostCategory = () => {
   const { register, handleSubmit } = useForm();
   const [postImage, setPostImage] = useState();
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("http://localhost:5000/category/create", {
-        ...data,
-        postImage,
-      });
+      const res = await axios.post(
+        'https://quiz-app-backend-production-f258.up.railway.app/category/create',
+        {
+          ...data,
+          postImage,
+        }
+      );
       console.log(res);
       console.log(data);
     } catch (err) {
@@ -32,7 +34,7 @@ const PostCategory = () => {
           <input
             className="p-3  border"
             placeholder="Enter Category Name"
-            {...register("name", { required: true })}
+            {...register('name', { required: true })}
           />
           {postImage && (
             <div className="w-1/5">
