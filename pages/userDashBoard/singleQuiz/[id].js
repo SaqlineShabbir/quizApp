@@ -1,118 +1,224 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Option from '../../../components/dashboard/quizUser/questions/Option';
+import Link from 'next/link';
+import { router } from 'next/router';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import ProgressBar from '../../../components/dashboard/quizUser/questions/ProgressBar';
-import { fetchQuestion } from '../../../redux/features/questions/questionSlice';
 
-//   useReducer
-// const initialState = null;
-// const reducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     case 'questions':
-//       action?.value?.forEach((question) => {
-//         question?.options?.forEach((option) => {
-//           option.checked = false;
-//         });
-//       });
-//       return action.value;
-//     case 'answer':
-//       const questions = _.cloneDeep(state);
-//       questions[action.questionId].options[action.optionIndex].checked =
-//         action.value;
-//       return questions;
-//     default:
-//       return state;
-//   }
-// };
-const SingleQuiz = () => {
-  const router = useRouter();
-  const id = router.query.id;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchQuestion(id));
-  }, [id, dispatch]);
-  const { question, isLoading, isError, error } = useSelector(
-    (state) => state.question
-  );
-
+const reducer = (state, action) => {
+  // console.log(action.payLoad.selectAnswer);
+  switch (action.type) {
+    case 'ANSWERED':
+      return state.map((question) => {
+        if (question._id === action.payLoad.id) {
+          return { ...question, selectAnswer: action.payLoad.selectAnswer };
+        } else {
+          return question;
+        }
+      });
+    default:
+      return state;
+  }
+};
+const SingleQuiz = ({ categoryData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  // const [qna, dispatch] = useReducer(reducer, initialState);
+  //timer
+  const [seconds, setSeconds] = useState(30);
+  const [countDown, setCountDown] = useState(30);
+  const timerId = useRef();
 
-  // const { question, isLoading, isError, error } = useFetchQuestions(id);
-  console.log(question[0]?.questions.length);
-  console.log(currentQuestion);
-  // console.log('id', question[currentQuiz]?.questions?.[currentQuestion]);
+  // get selected answer
+  const [selected, setSelected] = useState('');
+  const initialQuestions = categoryData[0]?.quizs;
+  const [questions, dispatch] = useReducer(reducer, initialQuestions);
+  const handleAnswer = (id, selectAnswer) => {
+    dispatch({
+      type: 'ANSWERED',
+      payLoad: { id: id, selectAnswer: selectAnswer },
+    });
+    setSelected(selectAnswer);
+  };
 
-  // useEffect(() => {
-  //   dispatch({
-  //     type: 'questions',
-  //     value: allQuestion,
-  //   });
-  // }, [dispatch, allQuestion]);
-
-  // handle when user clicks next question
+  //handle when user clicks next question
   const nextQuestion = () => {
-    if (currentQuestion <= question[0]?.questions?.length - 1) {
+    if (currentQuestion < questions.length) {
       setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion + 1);
-      localStorage.setItem('current', currentQuestion);
     }
-
-    console.log('......', localStorage.getItem('current'));
+    setCountDown(30);
+    setSelected('');
   };
   // handle when user clicks previous question
-  const prevQuestion = () => {
-    if (
-      currentQuestion >= 0 &&
-      currentQuestion <= question[0]?.questions?.length
-    ) {
-      setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion - 1);
-      localStorage.setItem('current', currentQuestion);
-    }
+  // const prevQuestion = () => {
+  //   if (currentQuestion >= 0) {
+  //     setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion - 1);
+  //   }
+  // };
 
-    console.log('......', localStorage.getItem('current'));
-  };
-
-  //calculate percentage
+  // calculate percentage
   const percentage =
-    question[0]?.questions?.length > 0
-      ? ((currentQuestion + 1) / question[0]?.questions?.length) * 100
-      : 0;
-  console.log('percentage', percentage);
+    questions.length > 0 ? ((currentQuestion + 1) / questions.length) * 100 : 0;
+
+  //handle result
+  useEffect(() => {
+    localStorage.setItem('questions', JSON.stringify(questions));
+  }, [questions]);
+
+  // handle timer
+  useEffect(() => {
+    timerId.current = setInterval(() => {
+      setCountDown((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(timerId.current);
+  }, []);
+  useEffect(() => {
+    if (countDown === 0) {
+      clearInterval(timerId.current);
+      router.push('http://localhost:3000//userDashBoard/result');
+    }
+  });
+
   return (
     <>
-      {isLoading && <div>Loading...</div>}
-      {isError && <div>There was an Error</div>}
-      {!isLoading && !isError && question.length > 0 && (
-        <div>
-          <div className="border mx-40 my-10 p-20">
-            <ProgressBar progress={percentage} />
-            <p>
-              Question:{' '}
-              {question[0]?.questions[localStorage.getItem('current')]?.title}?
-            </p>
-            {question[0]?.questions[
-              localStorage.getItem('current')
-            ]?.options?.map((option) => (
-              <Option key={option._id} option={option} />
-            ))}
-            <button
-              className="bg-orange-400 border px-5 py-4  rounded-xl"
+      <div>
+        <div className="border border-[#FFAE96] rounded lg:mx-40 mx-5 my-10 lg:p-20 p-5">
+          <div className="flex justify-end text-2xl  pb-4">
+            <p>Timer: {countDown}</p>
+          </div>
+          <ProgressBar progress={percentage} />
+          <p>Question: {questions[currentQuestion]?.question}?</p>
+          <div className="py-3  space-y-3">
+            <div
+              onClick={() => handleAnswer(questions[currentQuestion]?._id, 'a')}
+              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2 flex justify-between"
+            >
+              {questions[currentQuestion]?.a}
+              {/* //select icon */}
+              {selected === 'a' && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              )}
+            </div>
+            <div
+              onClick={() => handleAnswer(questions[currentQuestion]?._id, 'b')}
+              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2 flex justify-between"
+            >
+              {questions[currentQuestion]?.b}
+              {selected === 'b' && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              )}
+            </div>
+            <div
+              onClick={() => handleAnswer(questions[currentQuestion]?._id, 'c')}
+              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2 flex justify-between"
+            >
+              {questions[currentQuestion]?.c}
+              {selected === 'c' && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              )}
+            </div>
+            <div
+              onClick={() => handleAnswer(questions[currentQuestion]?._id, 'd')}
+              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2  flex justify-between"
+            >
+              {questions[currentQuestion]?.d}
+              {selected === 'd' && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              )}
+            </div>
+            <hr className="mt-20" />
+          </div>
+
+          <div className="flex  justify-end">
+            {/* <button
+              disabled={currentQuestion <= 0}
+              className="bg-orange-400 border px-3  py-1 rounded-xl"
               onClick={prevQuestion}
             >
               Previous
-            </button>
-            <button
-              className="bg-orange-400 border px-5 py-4  rounded-xl"
-              onClick={nextQuestion}
-            >
-              next
-            </button>
+            </button> */}
+            {currentQuestion === questions.length - 1 ? (
+              <Link href={'/userDashBoard/result'}>
+                <button className="bg-gradient-to-l from-[#FF6961] border  px-3 py-1 rounded-xl">
+                  Show Result
+                </button>
+              </Link>
+            ) : (
+              <button
+                disabled={currentQuestion === questions.length - 1}
+                className="border border-[#FFAE96]  px-10 py-1 rounded-xl"
+                onClick={nextQuestion}
+              >
+                next
+              </button>
+            )}
           </div>
+          <p className="pt-10">
+            <span className="font-bold">{currentQuestion + 1}</span> Out Of{' '}
+            <span className="font-bold">{questions.length}</span> Questions
+          </p>
         </div>
-      )}
+      </div>
     </>
   );
 };
 
 export default SingleQuiz;
+export async function getServerSideProps(context) {
+  // Fetch data from external API
+  const res = await fetch(
+    `https://quiz-app-backend-production-f258.up.railway.app/category/${context.query.id}`
+  );
+  const categoryData = await res.json();
+
+  // Pass data to the page via props
+  return { props: { categoryData } };
+}

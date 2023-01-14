@@ -1,29 +1,25 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchQuiz } from '../../../redux/features/quizs/quizSlice';
+import React from 'react';
 import Quiz from './Quiz';
 
-const QuizHome = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchQuiz());
-  }, [dispatch]);
+const QuizHome = ({ categoryData }) => {
+  console.log('okkk', categoryData);
 
-  const { allQuiz } = useSelector((state) => state.quiz);
   return (
-    <div className="border p-5 h-[88vh]">
+    <div className="border border-[#FFAE96] rounded p-5 h-[88vh]">
       <div className="flex justify-between pb-5">
         <div>
           <p className="text-2xl  font-bold">Select Quiz Topic for Test</p>
           <p className="pb-4">Featured Categories</p>
         </div>
-        <button className="lg:px-14 bg-orange-500  rounded-full">
-          Explore All Categories
-        </button>
+        <div>
+          <button className="border bg-gradient-to-l from-[#FF6961] rounded-full lg:px-5 lg:py-3 text-white">
+            Explore All Categories
+          </button>
+        </div>
       </div>
       <div className="grid grid-cols-5 ">
-        {allQuiz?.data?.map((quiz) => (
-          <Quiz key={quiz._id} quiz={quiz} />
+        {categoryData?.map((quizCategory) => (
+          <Quiz key={quizCategory._id} quizCategory={quizCategory} />
         ))}
       </div>
     </div>

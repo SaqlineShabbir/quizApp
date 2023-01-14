@@ -9,6 +9,7 @@ export default function TopNavigation() {
     dispatch(userLoggedOut());
   };
   const { toggle } = useToggle();
+  console.log(toggle);
   return (
     <header className="h-20 items-center relative z-10">
       <div className="flex flex-center flex-col h-full justify-center mx-auto relative px-3  z-10">
@@ -26,7 +27,7 @@ export default function TopNavigation() {
           </div>
           <div className="container flex left-0 relative w-3/4">
             <div className="group hidden items-center ml-8 relative w-full md:flex lg:w-72">
-              <div className="absolute block cursor-pointer flex items-center justify-center h-10 p-3 pr-2 text-gray-500 text-sm uppercase w-auto sm:hidden">
+              <div className="absolute  cursor-pointer flex items-center justify-center h-10 p-3 pr-2 text-gray-500 text-sm uppercase w-auto sm:hidden">
                 <svg
                   fill="none"
                   className="h-5 relative w-5"
