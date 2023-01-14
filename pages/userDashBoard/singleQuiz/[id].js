@@ -34,6 +34,7 @@ const SingleQuiz = ({ categoryData }) => {
       type: 'ANSWERED',
       payLoad: { id: id, selectAnswer: selectAnswer },
     });
+    setSelected(selectAnswer);
   };
 
   //handle when user clicks next question
@@ -42,6 +43,7 @@ const SingleQuiz = ({ categoryData }) => {
       setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion + 1);
     }
     setCountDown(30);
+    setSelected('');
   };
   // handle when user clicks previous question
   // const prevQuestion = () => {
@@ -85,27 +87,92 @@ const SingleQuiz = ({ categoryData }) => {
           <div className="py-3  space-y-3">
             <div
               onClick={() => handleAnswer(questions[currentQuestion]?._id, 'a')}
-              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2"
+              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2 flex justify-between"
             >
               {questions[currentQuestion]?.a}
+              {/* //select icon */}
+              {selected === 'a' && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              )}
             </div>
             <div
               onClick={() => handleAnswer(questions[currentQuestion]?._id, 'b')}
-              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2"
+              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2 flex justify-between"
             >
               {questions[currentQuestion]?.b}
+              {selected === 'b' && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              )}
             </div>
             <div
               onClick={() => handleAnswer(questions[currentQuestion]?._id, 'c')}
-              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2"
+              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2 flex justify-between"
             >
               {questions[currentQuestion]?.c}
+              {selected === 'c' && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              )}
             </div>
             <div
               onClick={() => handleAnswer(questions[currentQuestion]?._id, 'd')}
-              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2"
+              className="bg-[#F0F8FF] border border-[#84C5FE] py-1 px-2  flex justify-between"
             >
               {questions[currentQuestion]?.d}
+              {selected === 'd' && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              )}
             </div>
             <hr className="mt-20" />
           </div>
