@@ -4,7 +4,7 @@ const Quiz = ({ quizCategory }) => {
   console.log(quizCategory);
   return (
     <div className="p-3">
-      <Link href={`/userDashBoard/${quizCategory._id}`}>
+      <Link href={`/userDashBoard/quiz-test/${quizCategory._id}`}>
         {/* <Image
           className="rounded-xl "
           height={200}

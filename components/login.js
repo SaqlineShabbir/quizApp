@@ -1,34 +1,29 @@
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-
-import { useDispatch } from 'react-redux';
-import useAuth from '../hooks/useAuth';
-// import { loginUser } from '../redux/features/users/userSlice';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../context/AuthProvider';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const { signInUser } = useContext(AuthContext);
   const [error, setError] = useState('');
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const { loginUser } = useAuth();
 
-  const { data: session } = useSession();
-  console.log(session?.user);
+  const router = useRouter();
+
   const handleGoogleSignIn = (e) => {
     signIn();
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(
-    loginUser({
-      email,
-      password,
-    });
-    // );
+    setError('');
+    signInUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => setError(error.message));
   };
 
   return (
@@ -71,7 +66,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <p className="text-red-400">Forget Password?</p>
+              <p className="text-red-400">{error}</p>
               <button className="bg-red-400  py-5 px-10 lg:w-[400px] rounded-full block w-full">
                 Log in
               </button>

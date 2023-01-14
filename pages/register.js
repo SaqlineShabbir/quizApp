@@ -1,21 +1,14 @@
 import Link from 'next/link';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import useAuth from '../hooks/useAuth';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../context/AuthProvider';
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [ConfirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.user);
 
-  const { postUser } = useAuth();
-  //user already exists or not
-  const isExist = users[0]?.data?.message;
-  console.log(users);
-  console.log(isExist);
+  const { createUser } = useContext(AuthContext);
 
   //form submission
 
@@ -24,21 +17,12 @@ const Register = () => {
     if (password !== ConfirmPassword) {
       setError('Password does not match');
     } else {
-      postUser({
-        name,
-        email,
-        password,
-      });
-      // dispatch(
-      //   createUser({
-      //     name,
-      //     email,
-      //     password,
-      //   })
-      // );
-    }
-    if (isExist) {
-      setError('Email already exists');
+      createUser(email, password, name)
+        .then((result) => {
+          const user = result.user;
+          console.log(user);
+        })
+        .catch((error) => setError(error.message));
     }
   };
 

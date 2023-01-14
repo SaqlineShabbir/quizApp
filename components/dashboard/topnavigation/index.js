@@ -1,14 +1,14 @@
-import { useDispatch } from 'react-redux';
-import { userLoggedOut } from '../../../redux/features/users/userSlice';
+import { useContext } from 'react';
+import { AuthContext } from '../../../context/AuthProvider';
 
+import Image from 'next/image';
+import img from '../../../assets/images/user.PNG';
 import { useToggle } from '../provider/context';
-
 export default function TopNavigation() {
-  const dispatch = useDispatch();
-  const handleLogOut = () => {
-    dispatch(userLoggedOut());
-  };
+  const { user } = useContext(AuthContext);
   const { toggle } = useToggle();
+
+  const handleLogOut = () => {};
   return (
     <header className="h-20 items-center relative z-10">
       <div className="flex flex-center flex-col h-full justify-center mx-auto relative px-3  z-10">
@@ -25,7 +25,7 @@ export default function TopNavigation() {
             </button>
           </div>
           <div className="container flex left-0 relative w-3/4">
-            <div className="group hidden items-center ml-8 relative w-full md:flex lg:w-72">
+            <div className="group hidden items-center ml-1 relative w-full md:flex lg:w-72">
               <div className="absolute block cursor-pointer flex items-center justify-center h-10 p-3 pr-2 text-gray-500 text-sm uppercase w-auto sm:hidden">
                 <svg
                   fill="none"
@@ -102,13 +102,16 @@ export default function TopNavigation() {
                 />
               </svg>
             </p>
-            <p onClick={handleLogOut} className="block relative cursor-pointer">
-              <img
-                alt="Maurice Lokumba"
-                src="/images/1.jpg"
-                className="h-10 mx-auto object-cover rounded-full w-10"
+            <div onClick={handleLogOut} className="flex cursor-pointer">
+              {' '}
+              <Image
+                src={img}
+                width={40}
+                height={40}
+                className="rounded-full"
               />
-            </p>
+              <p className="pt-2 ml-1">{user?.displayName}</p>
+            </div>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export default function middleware(req) {
-  const verify = req.localStorage.get('loggedInUser');
+  const verify = req.cookies.get('loggedin');
   let url = req.url;
 
   if (!verify && url.includes('/userDashBoard')) {
@@ -9,6 +9,6 @@ export default function middleware(req) {
   }
 
   if (verify && url === 'http://localhost:3000/') {
-    return NextResponse.redirect('http://localhost:3000/dashboard');
+    return NextResponse.redirect('http://localhost:3000/userDashboard');
   }
 }
