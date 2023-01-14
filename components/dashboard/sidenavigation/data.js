@@ -12,27 +12,27 @@ const data = [
     link: '/userDashBoard',
   },
   {
-    title: 'Status',
+    title: 'Give A Quiz Test',
     icon: <StatusIcon />,
     link: '/admin/status',
   },
   {
-    title: 'Archives',
+    title: 'Score & Grade',
     icon: <ArchivesIcon />,
     link: '/admin/archives',
   },
   {
-    title: 'Credits',
+    title: 'Download Certificates',
     icon: <CreditsIcon />,
     link: '/admin/credits',
   },
   {
-    title: 'Settings',
+    title: 'Update Your Profile',
     icon: <SettingsIcon />,
     link: '/admin/settings',
   },
   {
-    title: 'Documentation',
+    title: 'Subscriptions',
     icon: <DocumentationIcon />,
     link: '/admin/documentation',
   },

@@ -1,18 +1,14 @@
-import { useSession } from 'next-auth/react';
 import Head from 'next/head';
-import { useSelector } from 'react-redux';
+import { useContext, useState } from 'react';
 import Login from '../components/login';
-import useAuthCheck from '../hooks/useAuthCheck';
+import { AuthContext } from '../context/AuthProvider';
+
 export default function Home() {
-  const { data: session } = useSession();
-  const { loggedInUser } = useSelector((state) => state.user);
-  console.log(loggedInUser);
-  const authChecked = useAuthCheck();
-  return !authChecked ? (
-    <div>Checking Authentication...</div>
-  ) : (
+  const [loggedInUser, setLoggedInUser] = useState(false);
+  const { user } = useContext(AuthContext);
+  return (
     <div className="h-screen  bg-gray-100 ">
-      {loggedInUser ? (
+      {user?.uid ? (
         <div>
           <Head>
             <title>Quiz App</title>
