@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthProvider';
 import { useToggle } from '../provider/context';
@@ -31,6 +31,7 @@ export default function SidenavItems() {
   const handleLogOut = () => {
     logOutUser();
     Cookies.remove('loggedin');
+    Router.push('/');
   };
   return (
     <div>

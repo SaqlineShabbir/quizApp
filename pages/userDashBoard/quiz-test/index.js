@@ -1,3 +1,4 @@
+import axios from 'axios';
 import DashboardLayout from '../../../components/dashboard/layout';
 import QuizHome from '../../../components/dashboard/quizUser/QuizHome';
 
@@ -14,10 +15,10 @@ const QuizTest = ({ categoryData }) => {
 export default QuizTest;
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(
-    'https://quiz-app-backend-production-f258.up.railway.app/category/all'
+  const { data } = await axios.get(
+    'https://quiz-app-backend-production-5339.up.railway.app/category/all'
   );
-  const categoryData = await res.json();
+  const categoryData = data;
 
   // Pass data to the page via props
   return { props: { categoryData } };

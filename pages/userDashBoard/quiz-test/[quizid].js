@@ -99,7 +99,7 @@ export default QuizDetails;
 export async function getServerSideProps() {
   // Fetch data from external API
   const res = await fetch(
-    'https://quiz-app-backend-production-f258.up.railway.app/category/all'
+    'https://quiz-app-backend-production-5339.up.railway.app/category/all'
   );
   const categoryData = await res.json();
   console.log(categoryData);

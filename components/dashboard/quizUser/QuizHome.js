@@ -2,8 +2,6 @@ import React from 'react';
 import Quiz from './Quiz';
 
 const QuizHome = ({ categoryData }) => {
-  console.log('okkk', categoryData);
-
   return (
     <div className="border border-[#FFAE96] rounded p-5 h-[88vh]">
       <div className="flex justify-between pb-5">

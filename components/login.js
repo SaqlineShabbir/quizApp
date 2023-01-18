@@ -1,4 +1,3 @@
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
@@ -7,13 +6,13 @@ import { AuthContext } from '../context/AuthProvider';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, signInUsingGoogle } = useContext(AuthContext);
   const [error, setError] = useState('');
 
   const router = useRouter();
 
   const handleGoogleSignIn = (e) => {
-    signIn();
+    signInUsingGoogle();
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -79,7 +78,9 @@ const Login = () => {
               {/* <p onClick={() => addUser()}>addUser</p> */}
               <div>
                 <p>Dont Have an Account?</p>
-                <Link href="/register">Sign Up</Link>
+                <Link className="text-black" href="/register">
+                  <p>Sign Up</p>
+                </Link>
               </div>
             </div>
           </form>

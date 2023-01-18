@@ -5,10 +5,6 @@ export default function middleware(req) {
   let url = req.url;
 
   if (!verify && url.includes('/userDashBoard')) {
-    return NextResponse.redirect('http://localhost:3000/');
-  }
-
-  if (verify && url === 'http://localhost:3000/') {
-    return NextResponse.redirect('http://localhost:3000/userDashboard');
+    return NextResponse.redirect('http://localhost:3000/sign-in');
   }
 }

@@ -6,9 +6,10 @@ import { AuthContext } from '../context/AuthProvider';
 export default function Home() {
   const [loggedInUser, setLoggedInUser] = useState(false);
   const { user } = useContext(AuthContext);
+  console.log(user);
   return (
     <div className="h-screen  bg-gray-100 ">
-      {user?.uid ? (
+      {user?.email ? (
         <div>
           <Head>
             <title>Quiz App</title>

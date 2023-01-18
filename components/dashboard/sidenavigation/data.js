@@ -14,12 +14,12 @@ const data = [
   {
     title: 'Give A Quiz Test',
     icon: <StatusIcon />,
-    link: '/admin/status',
+    link: '/userDashBoard/quiz-test',
   },
   {
-    title: 'Score & Grade',
+    title: 'Delete Category',
     icon: <ArchivesIcon />,
-    link: '/admin/archives',
+    link: '/adminDashBoard/delete-category',
   },
   {
     title: 'Download Certificates',

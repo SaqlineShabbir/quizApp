@@ -109,6 +109,7 @@ export default function TopNavigation() {
                 width={40}
                 height={40}
                 className="rounded-full"
+                alt="img"
               />
               <p className="pt-2 ml-1">{user?.displayName}</p>
             </div>

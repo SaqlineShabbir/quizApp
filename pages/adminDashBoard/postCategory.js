@@ -9,7 +9,7 @@ const PostCategory = () => {
   const onSubmit = async (data) => {
     try {
       const res = await axios.post(
-        'https://quiz-app-backend-production-f258.up.railway.app/category/create',
+        'https://quiz-app-backend-production-5339.up.railway.app/category/create',
         {
           ...data,
           postImage,
