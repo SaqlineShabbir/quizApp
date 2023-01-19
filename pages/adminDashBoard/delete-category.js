@@ -6,26 +6,26 @@ import DashboardLayout from '../../components/dashboard/layout';
 
 const DeleteCategory = ({ categoryData }) => {
   //delete category
-  const handleDelete = (categoryId) => {
-    async () => {
-      // DELETE request using axios with async/await
+  const handleDelete = async (categoryId) => {
+    console.log('deleting', categoryId);
 
-      await axios
-        .delete(
-          `https://quiz-app-backend-production-5339.up.railway.app/category/${categoryId}`
-        )
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => (error) => {
-          console.log(error.message);
-        });
-    };
+    // DELETE request using axios with async/await
+
+    await axios
+      .delete(
+        `https://quiz-app-backend-production-5339.up.railway.app/category/${categoryId}`
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => (error) => {
+        console.log(error.message);
+      });
   };
 
   return (
     <DashboardLayout>
-      <div className="grid grid-cols-5 ">
+      <div className="grid grid-cols-5 border rounded">
         {categoryData?.map((quizCategory) => (
           <div key={quizCategory._id} className="p-3 relative">
             {quizCategory?.postImage && (

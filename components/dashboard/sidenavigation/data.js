@@ -22,14 +22,14 @@ const data = [
     link: '/adminDashBoard/delete-category',
   },
   {
-    title: 'Download Certificates',
+    title: 'Add Category',
     icon: <CreditsIcon />,
-    link: '/admin/credits',
+    link: '/adminDashBoard/post-category',
   },
   {
-    title: 'Update Your Profile',
+    title: 'Make Admin',
     icon: <SettingsIcon />,
-    link: '/admin/settings',
+    link: '/adminDashBoard/make-admin',
   },
   {
     title: 'Subscriptions',
