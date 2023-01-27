@@ -75,7 +75,7 @@ const AuthProvider = ({ children }) => {
   // save user to database
   const saveUser = (name, email) => {
     axios
-      .post('https://quiz-app-backend-production-5339.up.railway.app/user', {
+      .post('https://quiz-app-backend-blond.vercel.app/user', {
         name,
         email,
       })

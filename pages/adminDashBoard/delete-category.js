@@ -13,7 +13,7 @@ const DeleteCategory = ({ categoryData }) => {
 
     await axios
       .delete(
-        `https://quiz-app-backend-production-5339.up.railway.app/category/${categoryId}`
+        `https://quiz-app-backend-blond.vercel.app/category/${categoryId}`
       )
       .then((response) => {
         console.log(response);
@@ -68,7 +68,7 @@ export default DeleteCategory;
 export async function getServerSideProps() {
   // Fetch data from external API
   const res = await fetch(
-    'https://quiz-app-backend-production-5339.up.railway.app/category/all'
+    'https://quiz-app-backend-blond.vercel.app/category/all'
   );
   const categoryData = await res.json();
 

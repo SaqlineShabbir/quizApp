@@ -12,7 +12,7 @@ const PostQuiz = ({ categoryData }) => {
     console.log('posting', data);
     try {
       const res = await axios.post(
-        `https://quiz-app-backend-production-5339.up.railway.app/quiz/addquiz/${categoryId}`,
+        `https://quiz-app-backend-blond.vercel.app/quiz/addquiz/${categoryId}`,
         data
       );
     } catch (err) {
@@ -103,7 +103,7 @@ export default PostQuiz;
 export async function getServerSideProps() {
   // Fetch data from external API
   const res = await fetch(
-    'https://quiz-app-backend-production-5339.up.railway.app/category/all'
+    'https://quiz-app-backend-blond.vercel.app/category/all'
   );
   const categoryData = await res.json();
 

@@ -90,7 +90,7 @@ export default DashBoard;
 export async function getServerSideProps() {
   // Fetch data from external API
   const res = await fetch(
-    'https://quiz-app-backend-production-5339.up.railway.app/category/all'
+    'https://quiz-app-backend-blond.vercel.app/category/all'
   );
   const categoryData = await res.json();
 

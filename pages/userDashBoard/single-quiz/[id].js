@@ -215,7 +215,7 @@ export default SingleQuiz;
 export async function getServerSideProps(context) {
   // Fetch data from external API
   const res = await fetch(
-    `https://quiz-app-backend-production-5339.up.railway.app/category/${context.query.id}`
+    `https://quiz-app-backend-blond.vercel.app/category/${context.query.id}`
   );
   const categoryData = await res.json();
 
