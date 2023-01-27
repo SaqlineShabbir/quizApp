@@ -19,6 +19,7 @@ export default function SideNavigation({ mobilePosition }) {
   return (
     <aside
       ref={ref}
+      
       className={`${style.default} ${style.mobilePosition[mobilePosition]} 
         ${open ? style.open : style.close} ${css.scrollbar}`}
     >
