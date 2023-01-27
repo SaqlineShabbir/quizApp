@@ -1,13 +1,14 @@
-import { useContext } from 'react';
-import { AuthContext } from '../../../context/AuthProvider';
+import { useContext } from "react";
+import { AuthContext } from "../../../context/AuthProvider";
 
-import Image from 'next/image';
-import img from '../../../assets/images/user.PNG';
-import { useToggle } from '../provider/context';
+import Image from "next/image";
+import img from "../../../assets/images/user.PNG";
+import { useToggle } from "../provider/context";
 export default function TopNavigation() {
   const { user } = useContext(AuthContext);
-  const { toggle } = useToggle();
-
+  const { open, toggle } = useToggle();
+  console.log("🚀 ~ file: index.js:10 ~ TopNavigation ~ open", open)
+  
   const handleLogOut = () => {};
   return (
     <header className="h-20 items-center relative z-10">
@@ -103,7 +104,7 @@ export default function TopNavigation() {
               </svg>
             </p>
             <div onClick={handleLogOut} className="flex cursor-pointer">
-              {' '}
+              {" "}
               <Image
                 src={img}
                 width={40}
