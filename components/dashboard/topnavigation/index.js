@@ -4,11 +4,13 @@ import { AuthContext } from "../../../context/AuthProvider";
 import Image from "next/image";
 import img from "../../../assets/images/user.PNG";
 import { useToggle } from "../provider/context";
+import { ToggleContext } from "../provider/ToggleProvider";
 export default function TopNavigation() {
   const { user } = useContext(AuthContext);
-  const { open, toggle } = useToggle();
-  console.log("🚀 ~ file: index.js:10 ~ TopNavigation ~ open", open)
-  
+  const { open, toggle } = useContext(ToggleContext);
+  // const { open, toggle } = useToggle();
+  console.log("🚀 ~ file: index.js:10 ~ TopNavigation ~ open", open);
+
   const handleLogOut = () => {};
   return (
     <header className="h-20 items-center relative z-10">
@@ -20,9 +22,22 @@ export default function TopNavigation() {
               aria-expanded="false"
               aria-label="Toggle sidenav"
               onClick={toggle}
-              className="text-4xl focus:outline-none"
+              className="text-4xl focus:outline-none sm:hidden"
             >
-              &#8801;
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+                />
+              </svg>
             </button>
           </div>
           <div className="container flex left-0 relative w-3/4">
