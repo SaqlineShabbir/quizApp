@@ -70,7 +70,7 @@ const QuizDetails = ({ categoryData }) => {
               of completion.
             </p>
             <br />
-            <Link href={`/userDashBoard/single-quiz/${quizId}`}>
+            <Link href={`/dashboard/single-quiz/${quizId}`}>
               <div className="pb-10 lg:pb-0">
                 <button className="border rounded-full py-2 px-10 bg-gradient-to-l from-[#FF6961] text-white ">
                   Start quiz

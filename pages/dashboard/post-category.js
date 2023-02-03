@@ -27,9 +27,9 @@ const PostCategory = () => {
 
   return (
     <DashboardLayout>
-      <div className="flex justify-center border  rounded ">
+      <div className="flex justify-center border border-[#FFAE96] rounded  lg:pb-20">
         <div className="mt-20">
-          <p>Add Category..</p>
+          <p>Add Category</p>
           <form
             className="mx-10 bg-red-50 mt-20"
             onSubmit={handleSubmit(onSubmit)}

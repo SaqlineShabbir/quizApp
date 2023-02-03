@@ -5,7 +5,7 @@ const Quiz = ({ quizCategory }) => {
   console.log(quizCategory);
   return (
     <div className="p-3 relative">
-      <Link href={`/userDashBoard/quiz-test/${quizCategory._id}`}>
+      <Link href={`/dashboard/quiz-test/${quizCategory._id}`}>
         {quizCategory?.postImage && (
           <Image
             className="rounded-xl "

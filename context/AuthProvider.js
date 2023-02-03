@@ -87,6 +87,18 @@ const AuthProvider = ({ children }) => {
       });
   };
 
+  // const allUsers =()=>{
+  //   axios
+  //     .get('https://quiz-app-backend-blond.vercel.app/user'
+  //     )
+  //     .then((response) => {
+  //       console.log(response.data);
+  //     })
+  //     .catch((error) => (error) => {
+  //       console.log(error.message);
+  //     });
+  // }
+
   const authInfo = {
     createUser,
     signInUser,

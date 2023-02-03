@@ -73,7 +73,7 @@ const DashBoard = ({ categoryData }) => {
                   <p>Featured Quiz Categories</p>
                 </div>
                 <div className="grid grid-cols-2 ">
-                  {categoryData?.slice(1, 3).map((quizCategory) => (
+                  {categoryData?.map((quizCategory) => (
                     <Quiz key={quizCategory._id} quizCategory={quizCategory} />
                   ))}
                 </div>

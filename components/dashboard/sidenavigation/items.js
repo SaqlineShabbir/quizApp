@@ -4,9 +4,12 @@ import Router, { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthProvider';
 import { useToggle } from '../provider/context';
+import ArchivesIcon from './icons/archives';
+import CreditsIcon from './icons/credits';
+import HomeIcon from './icons/home';
 
-import data from './data';
-
+import SettingsIcon from './icons/settings';
+import StatusIcon from './icons/status';
 const style = {
   title: `mx-4 text-sm text-black`,
   active: ` rounded-full`,
@@ -14,20 +17,15 @@ const style = {
   close: `sm:duration-700 sm:ease-out sm:invisible sm:opacity-0 sm:transition-all`,
   open: `sm:duration-500 sm:ease-in lg:h-auto sm:opacity-100 sm:transition-all sm:w-auto`,
 };
-// const style = {
-//   title: `mx-4 text-sm`,
-//   active: `bg-orange-500 rounded-full`,
-//   link: `flex items-center justify-start my-1 p-3 w-full hover:text-orange`,
-//   close: `lg:duration-700 lg:ease-out lg:invisible lg:opacity-0 lg:transition-all`,
-//   open: `lg:duration-500 lg:ease-in lg:h-auto lg:opacity-100 lg:transition-all lg:w-auto`,
-// };
 
-export default function SidenavItems() {
+export default function SidenavItems({ users }) {
   // const [open, setOpen] = useState(true);
   const { asPath } = useRouter();
   const { open } = useToggle();
-  const { logOutUser } = useContext(AuthContext);
+  const { logOutUser, user } = useContext(AuthContext);
 
+  const expectedUser = users?.find((u) => u.email === user.email);
+  console.log(users, 'expectedUser', expectedUser);
   const handleLogOut = () => {
     logOutUser();
     Cookies.remove('loggedin');
@@ -35,26 +33,57 @@ export default function SidenavItems() {
   };
   return (
     <div>
-      <ul className="md:pl-3">
-        <li>
-          {data.map((item) => (
-            <Link href={item.link} key={item.title}>
-              <a
-                className={`${style.link} active:bg-orange-500 hover:bg-orange-500 rounded-full text-black`}
-              >
-                <div
-                  className={`p-2 ${
-                    item.link === asPath ? style.active : ''
-                  } text-black`}
-                >
-                  <span>{item.icon}</span>
-                </div>
-                <span className="text-black">{item.title}</span>
-              </a>
-            </Link>
-          ))}
-        </li>
-      </ul>
+      <Link href="/dashboard">
+        <div
+          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
+        >
+          <span>
+            <HomeIcon />
+          </span>
+          <p>Home</p>
+        </div>
+      </Link>
+      <Link href="/dashboard/quiz-test">
+        <div
+          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2  cursor-pointer`}
+        >
+          <span>
+            <StatusIcon />
+          </span>
+          <p>Give A Quiz Test</p>
+        </div>
+      </Link>
+      <Link href="/dashboard/delete-category">
+        <div
+          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
+        >
+          <span>
+            <ArchivesIcon />
+          </span>
+          <p>Delete Category</p>
+        </div>
+      </Link>
+      <Link href="/dashboard/post-category">
+        <div
+          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
+        >
+          <span>
+            <CreditsIcon />
+          </span>
+          <p>Add Category</p>
+        </div>
+      </Link>
+      <Link href="/dashboard/make-admin">
+        <div
+          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
+        >
+          <span>
+            <SettingsIcon />
+          </span>
+          <p>Make Admin</p>
+        </div>
+      </Link>
+
       <div className="mt-24">
         <button
           className="bg-black rounded-full px-12 py-2 ml-6 flex"

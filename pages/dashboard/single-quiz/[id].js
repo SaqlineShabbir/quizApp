@@ -71,7 +71,7 @@ const SingleQuiz = ({ categoryData }) => {
   useEffect(() => {
     if (countDown === 0) {
       clearInterval(timerId.current);
-      router.push('http://localhost:3000//userDashBoard/result');
+      router.push('/dashboard/result');
     }
   });
 
