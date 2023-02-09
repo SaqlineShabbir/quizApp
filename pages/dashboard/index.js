@@ -31,25 +31,25 @@ const DashBoard = ({ categoryData }) => {
           </div>
           {/* //achievement */}
           <div>
-            <div className="grid grid-cols-2  mt-20">
+            <div className="lg:flex mt-20  space-x-10">
               <div className="w-1/2 ">
                 <p className="font-bold">Achievements</p>
                 <div className="pt-3 pl-2">
                   <ProgressBar progress={80} />
                 </div>
 
-                <div>
+                <div className="shadow-lg px-5 rounded-lg pb-5">
                   <div className="mt-10 w-[100%]">
                     <p>Quiz Topics</p>
                     <div className="flex mt-3 pb-3">
-                      <div className="space-y-2  w-[90%]">
+                      <div className="space-y-2  ">
                         <p>Beginner React Certification</p>
                         <p>Beginner React Certification</p>
                         <p>Beginner React Certification</p>
                         <p>Beginner React Certification</p>
                         <p>Beginner React Certification</p>
                       </div>
-                      <div className="space-y-2  pl-10 w-[10%]">
+                      <div className="space-y-2  pl-10 ">
                         <p>80%</p>
                         <p>70%</p>
                         <p>60%</p>
@@ -70,7 +70,7 @@ const DashBoard = ({ categoryData }) => {
 
               <div className="w-1/2 ">
                 <div>
-                  <p>Featured Quiz Categories</p>
+                  <p className="font-bold">Featured Quiz Categories</p>
                 </div>
                 <div className="grid grid-cols-2 ">
                   {categoryData?.map((quizCategory) => (

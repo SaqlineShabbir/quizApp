@@ -51,7 +51,9 @@ const AuthProvider = ({ children }) => {
 
         // The signed-in user info.
         const user = result.user;
+        console.log('goo user', user);
         setUser(user);
+        saveUser(user.displayName, user.email);
 
         // ...
       })

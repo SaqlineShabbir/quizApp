@@ -32,7 +32,7 @@ export default function SidenavItems({ users }) {
     Router.push('/');
   };
   return (
-    <div>
+    <div className="">
       <Link href="/dashboard">
         <div
           className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
@@ -40,7 +40,7 @@ export default function SidenavItems({ users }) {
           <span>
             <HomeIcon />
           </span>
-          <p>Home</p>
+          <p>Dashboard</p>
         </div>
       </Link>
       <Link href="/dashboard/quiz-test">
@@ -51,6 +51,56 @@ export default function SidenavItems({ users }) {
             <StatusIcon />
           </span>
           <p>Give A Quiz Test</p>
+        </div>
+      </Link>
+      <Link href="/dashboard/score&grade">
+        <div
+          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2  cursor-pointer`}
+        >
+          <span>
+            <StatusIcon />
+          </span>
+          <p>Score & Grade</p>
+        </div>
+      </Link>
+      <Link href="/dashboard/download-certificates">
+        <div
+          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2  cursor-pointer`}
+        >
+          <span>
+            <StatusIcon />
+          </span>
+          <p>Download Certificates</p>
+        </div>
+      </Link>
+      <Link href="/dashboard/update-profile">
+        <div
+          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2  cursor-pointer`}
+        >
+          <span>
+            <StatusIcon />
+          </span>
+          <p>Update Your Profile</p>
+        </div>
+      </Link>
+      <Link href="/dashboard/subscriptions">
+        <div
+          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2  cursor-pointer`}
+        >
+          <span>
+            <StatusIcon />
+          </span>
+          <p>Subscriptions</p>
+        </div>
+      </Link>
+      <Link href="/dashboard/review">
+        <div
+          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2  cursor-pointer`}
+        >
+          <span>
+            <StatusIcon />
+          </span>
+          <p>Give Us A Review</p>
         </div>
       </Link>
       <Link href="/dashboard/delete-category">

@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
-import { AuthContext } from '../context/AuthProvider';
+import { AiFillGoogleCircle, AiFillTwitterCircle } from 'react-icons/ai';
+import { BsFacebook } from 'react-icons/bs';
 
+import { AuthContext } from '../context/AuthProvider';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,6 +17,7 @@ const Login = () => {
     signInUsingGoogle();
   };
   const handleSubmit = (e) => {
+    console.log('si');
     e.preventDefault();
     setError('');
     signInUser(email, password)
@@ -26,8 +29,8 @@ const Login = () => {
   };
 
   return (
-    <div className="lg:flex">
-      <div className="bg-red-100  lg:w-1/2 h-[100vh]">
+    <div className="lg:flex h-full overflow-y-scroll">
+      <div className="bg-red-100   h-full">
         <div className="flex  justify-center items-center gap-10 py-[300px] lg:px-[200px]  md:px-[70px]  px-10">
           <div className="space-y-5">
             <p className="">
@@ -40,7 +43,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white  lg:w-1/2  px-20">
+      <div className="bg-white    px-20">
         <p className="mt-20">Back To Topify</p>
         <div className="flex flex-col justify-center items-center gap-10 mt-24">
           <p className="flex  items-center lg:text-4xl text-2xl font-bold">
@@ -66,16 +69,30 @@ const Login = () => {
                 required
               />
               <p className="text-red-400">{error}</p>
-              <button className="bg-red-400  py-5 px-10 lg:w-[400px] rounded-full block w-full">
+              <button
+                type="submit"
+                className="bg-red-400  py-5 px-10 lg:w-[400px] rounded-full block w-full"
+              >
                 Log in
               </button>
-              <button
-                onClick={handleGoogleSignIn}
+              {/* <button
+                
                 className="bg-red-400  py-5 px-10 lg:w-[400px] rounded-full block w-full"
               >
                 Log in with google
-              </button>
+              </button> */}
               {/* <p onClick={() => addUser()}>addUser</p> */}
+              <div className="flex justify-center">
+                <div className=" cursor-pointer flex  space-x-5">
+                  <BsFacebook size={50} color="#FFAE96" className="mt-1" />
+                  <AiFillGoogleCircle
+                    size={60}
+                    color="#FFAE96"
+                    onClick={handleGoogleSignIn}
+                  />
+                  <AiFillTwitterCircle size={60} color="#FFAE96" />
+                </div>
+              </div>
               <div>
                 <p>Dont Have an Account?</p>
                 <Link className="text-black" href="/register">
