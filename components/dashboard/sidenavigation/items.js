@@ -25,7 +25,7 @@ export default function SidenavItems({ users }) {
   const { logOutUser, user } = useContext(AuthContext);
 
   const expectedUser = users?.find((u) => u.email === user.email);
-  console.log(users, 'expectedUser', expectedUser);
+
   const handleLogOut = () => {
     logOutUser();
     Cookies.remove('loggedin');
@@ -34,9 +34,7 @@ export default function SidenavItems({ users }) {
   return (
     <div className="">
       <Link href="/dashboard">
-        <div
-          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
-        >
+        <div className="flex  hover:bg-orange-500 active:bg-orange-700 focus:outline-none focus:ring focus:ring-orange-300 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer">
           <span>
             <HomeIcon />
           </span>
@@ -121,6 +119,16 @@ export default function SidenavItems({ users }) {
             <CreditsIcon />
           </span>
           <p>Add Category</p>
+        </div>
+      </Link>
+      <Link href="/dashboard/post-question">
+        <div
+          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
+        >
+          <span>
+            <CreditsIcon />
+          </span>
+          <p>Add Question</p>
         </div>
       </Link>
       <Link href="/dashboard/make-admin">

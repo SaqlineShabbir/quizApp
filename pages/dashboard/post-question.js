@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import DashboardLayout from '../../components/dashboard/layout';
 
-const PostQuiz = ({ categoryData }) => {
+const PostQuestion = ({ categoryData }) => {
   const [categoryId, setCetegoryId] = useState('');
   const { register, handleSubmit } = useForm();
 
@@ -98,7 +98,7 @@ const PostQuiz = ({ categoryData }) => {
   );
 };
 
-export default PostQuiz;
+export default PostQuestion;
 
 export async function getServerSideProps() {
   // Fetch data from external API

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { router } from 'next/router';
+import { useRouter } from 'next/router';
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import ProgressBar from '../../../components/dashboard/quizUser/questions/ProgressBar';
 
@@ -19,6 +19,8 @@ const reducer = (state, action) => {
   }
 };
 const SingleQuiz = ({ categoryData }) => {
+  const router = useRouter();
+  const { id } = router.query;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   //timer
   const [seconds, setSeconds] = useState(30);
@@ -45,12 +47,14 @@ const SingleQuiz = ({ categoryData }) => {
     setCountDown(30);
     setSelected('');
   };
-  // handle when user clicks previous question
-  // const prevQuestion = () => {
-  //   if (currentQuestion >= 0) {
-  //     setCurrentQuestion((prevCurrentQuestion) => prevCurrentQuestion - 1);
-  //   }
-  // };
+  //result calculation
+  let score = 0;
+  // calculate answer
+  questions?.forEach((element) => {
+    if (element?.correctAnswer === element?.selectAnswer) {
+      score = score + (5 / (questions?.length * 5)) * 100;
+    }
+  });
 
   // calculate percentage
   const percentage =
@@ -58,8 +62,8 @@ const SingleQuiz = ({ categoryData }) => {
 
   //handle result
   useEffect(() => {
-    localStorage.setItem('questions', JSON.stringify(questions));
-  }, [questions]);
+    localStorage.setItem('questions', JSON.stringify({ id, score }));
+  }, [score, id]);
 
   // handle timer
   useEffect(() => {
@@ -186,7 +190,7 @@ const SingleQuiz = ({ categoryData }) => {
               Previous
             </button> */}
             {currentQuestion === questions.length - 1 ? (
-              <Link href={'/userDashBoard/result'}>
+              <Link href={'/dashboard/result'}>
                 <button className="bg-gradient-to-l from-[#FF6961] border  px-3 py-1 rounded-xl">
                   Show Result
                 </button>
