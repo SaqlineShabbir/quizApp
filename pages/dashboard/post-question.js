@@ -9,7 +9,6 @@ const PostQuestion = ({ categoryData }) => {
 
   //post data to server
   const onSubmit = async (data) => {
-    console.log('posting', data);
     try {
       const res = await axios.post(
         `https://quiz-app-backend-blond.vercel.app/quiz/addquiz/${categoryId}`,

@@ -3,7 +3,6 @@ import DashboardLayout from '../../../components/dashboard/layout';
 import QuizHome from '../../../components/dashboard/quizUser/QuizHome';
 
 const QuizTest = ({ categoryData }) => {
-  console.log(categoryData);
   return (
     <>
       <DashboardLayout>

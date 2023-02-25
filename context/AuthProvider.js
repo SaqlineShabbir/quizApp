@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const provider = new GoogleAuthProvider();
   const [userData, setUserData] = useState([]);
-  console.log('userdata', user?.email, userData);
+
   // register user
   const createUser = (email, password, name) => {
     return createUserWithEmailAndPassword(auth, email, password).then(() => {
@@ -75,13 +75,11 @@ const AuthProvider = ({ children }) => {
       });
   };
   const logOutUser = () => {
-    console.log('loogedout');
     return signOut(auth);
   };
   //observe  user
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log('userObserbing', currentUser);
       setUser(currentUser);
     });
     return () => unSubscribe();
@@ -94,9 +92,7 @@ const AuthProvider = ({ children }) => {
         name,
         email,
       })
-      .then((response) => {
-        console.log(response.data);
-      })
+      .then((response) => {})
       .catch((error) => (error) => {
         console.log(error.message);
       });
@@ -110,7 +106,6 @@ const AuthProvider = ({ children }) => {
         `https://quiz-app-backend-blond.vercel.app/user/${email}`
       );
 
-      console.log('ressss', res.data);
       setUserData(res.data);
     } catch (err) {
       console.log(err);

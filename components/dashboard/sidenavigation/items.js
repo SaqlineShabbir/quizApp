@@ -23,7 +23,7 @@ const style = {
 export default function SidenavItems({ users }) {
   const { logOutUser, user } = useContext(AuthContext);
   const [userData, setUserData] = useState([]);
-  console.log(userData);
+
   ///get user from backend
   useEffect(() => {
     getUser(user?.email);
