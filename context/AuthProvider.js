@@ -19,13 +19,19 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const provider = new GoogleAuthProvider();
+  const [userData, setUserData] = useState([]);
+  console.log('userdata', user?.email, userData);
   // register user
   const createUser = (email, password, name) => {
     return createUserWithEmailAndPassword(auth, email, password).then(() => {
       const newUser = { email, displayName: name };
       setUser(newUser);
+      //saving user to backend
       saveUser(name, email);
+      //getting user
+      getUser(email);
       Cookies.set('loggedin', 'true');
+
       updateProfile(auth.currentUser, {
         displayName: name,
       })
@@ -40,6 +46,9 @@ const AuthProvider = ({ children }) => {
   // login user
   const signInUser = (email, password) => {
     Cookies.set('loggedin', 'true');
+    //getting user
+    getUser(email);
+
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -55,6 +64,9 @@ const AuthProvider = ({ children }) => {
         setUser(user);
         saveUser(user.displayName, user.email);
 
+        //getting user
+        getUser(user?.email);
+
         // ...
       })
       .catch((error) => {
@@ -63,6 +75,7 @@ const AuthProvider = ({ children }) => {
       });
   };
   const logOutUser = () => {
+    console.log('loogedout');
     return signOut(auth);
   };
   //observe  user
@@ -87,6 +100,21 @@ const AuthProvider = ({ children }) => {
       .catch((error) => (error) => {
         console.log(error.message);
       });
+  };
+
+  //get user from  backend
+
+  const getUser = async (email) => {
+    try {
+      const res = await axios.get(
+        `https://quiz-app-backend-blond.vercel.app/user/${email}`
+      );
+
+      console.log('ressss', res.data);
+      setUserData(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // const allUsers =()=>{
