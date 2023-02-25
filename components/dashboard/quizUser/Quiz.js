@@ -7,13 +7,15 @@ const Quiz = ({ quizCategory }) => {
     <div className="p-3 relative">
       <Link href={`/dashboard/quiz-test/${quizCategory._id}`}>
         {quizCategory?.postImage && (
-          <Image
-            className="rounded-xl "
-            height={130}
-            width={155}
-            src={quizCategory?.postImage}
-            alt=""
-          />
+          <div>
+            <Image
+              className="rounded-xl "
+              height={130}
+              width={155}
+              src={quizCategory?.postImage}
+              alt=""
+            />
+          </div>
         )}
       </Link>
       <p className=" font-bold cursor-pointer absolute  bottom-8 left-8">

@@ -1,7 +1,8 @@
+import axios from 'axios';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../context/AuthProvider';
 import { useToggle } from '../provider/context';
 import ArchivesIcon from './icons/archives';
@@ -10,6 +11,7 @@ import HomeIcon from './icons/home';
 
 import SettingsIcon from './icons/settings';
 import StatusIcon from './icons/status';
+
 const style = {
   title: `mx-4 text-sm text-black`,
   active: ` rounded-full`,
@@ -19,10 +21,27 @@ const style = {
 };
 
 export default function SidenavItems({ users }) {
+  const { logOutUser, user } = useContext(AuthContext);
+  const [userData, setUserData] = useState([]);
+  console.log(userData);
+  ///get user from backend
+  useEffect(() => {
+    getUser(user?.email);
+  }, [user]);
+  const getUser = async (email) => {
+    try {
+      const res = await axios.get(
+        `https://quiz-app-backend-blond.vercel.app/user/${email}`
+      );
+
+      setUserData(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   // const [open, setOpen] = useState(true);
   const { asPath } = useRouter();
   const { open } = useToggle();
-  const { logOutUser, user } = useContext(AuthContext);
 
   const expectedUser = users?.find((u) => u.email === user.email);
 
@@ -101,46 +120,58 @@ export default function SidenavItems({ users }) {
           <p>Give Us A Review</p>
         </div>
       </Link>
-      <Link href="/dashboard/delete-category">
-        <div
-          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
-        >
-          <span>
-            <ArchivesIcon />
-          </span>
-          <p>Delete Category</p>
-        </div>
-      </Link>
-      <Link href="/dashboard/post-category">
-        <div
-          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
-        >
-          <span>
-            <CreditsIcon />
-          </span>
-          <p>Add Category</p>
-        </div>
-      </Link>
-      <Link href="/dashboard/post-question">
-        <div
-          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
-        >
-          <span>
-            <CreditsIcon />
-          </span>
-          <p>Add Question</p>
-        </div>
-      </Link>
-      <Link href="/dashboard/make-admin">
-        <div
-          className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
-        >
-          <span>
-            <SettingsIcon />
-          </span>
-          <p>Make Admin</p>
-        </div>
-      </Link>
+
+      {userData[0]?.role === 'admin' && (
+        <Link href="/dashboard/delete-category">
+          <div
+            className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
+          >
+            <span>
+              <ArchivesIcon />
+            </span>
+            <p>Delete Category</p>
+          </div>
+        </Link>
+      )}
+
+      {userData[0]?.role === 'admin' && (
+        <Link href="/dashboard/post-category">
+          <div
+            className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
+          >
+            <span>
+              <CreditsIcon />
+            </span>
+            <p>Add Category</p>
+          </div>
+        </Link>
+      )}
+
+      {userData[0]?.role === 'admin' && (
+        <Link href="/dashboard/post-question">
+          <div
+            className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
+          >
+            <span>
+              <CreditsIcon />
+            </span>
+            <p>Add Question</p>
+          </div>
+        </Link>
+      )}
+
+      {userData[0]?.role === 'admin' && (
+        <Link href="/dashboard/make-admin">
+          <div
+            className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
+          >
+            <span>
+              <SettingsIcon />
+            </span>
+            <p>Make Admin</p>
+          </div>
+        </Link>
+      )}
 
       <div className="mt-24">
         <button

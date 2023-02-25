@@ -20,7 +20,7 @@ const Index = () => {
   }, []);
   useEffect(() => {
     putUserResult(data?.score, data?.id, user);
-  }, [putUserResult, user, data?.score, data?.id]);
+  }, [user, data?.score, data?.id]);
 
   const putUserResult = async (score, id, user) => {
     try {

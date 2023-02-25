@@ -1,7 +1,44 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
 import DashboardLayout from '../../components/dashboard/layout';
+import { AuthContext } from '../../context/AuthProvider';
 
 const ScoreGrade = () => {
+  const { user } = useContext(AuthContext);
+  const [userData, setUserData] = useState([]);
+
+  // filter how many quiz test user took
+  const userInfo = userData[0]?.attainQuizs?.filter((attain) => attain.id);
+
+  //calculate overall per
+  let score = 0;
+  let total = 0;
+  // calculate answer
+  userInfo?.forEach((element) => {
+    total += element.score;
+
+    score = (total / (userInfo?.length * 100)) * 100;
+  });
+
+  useEffect(() => {
+    getUser(user?.email);
+  }, [user]);
+
+  const getUser = async (email) => {
+    try {
+      const res = await axios.get(
+        `https://quiz-app-backend-blond.vercel.app/user/${email}`
+      );
+
+      setUserData(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //Certificates Achieved calculation
+  const certificatesAchieved = userInfo?.filter((info) => info.score >= 80);
+
   return (
     <DashboardLayout>
       <div className="  border rounded  border-[#FFAE96]">
@@ -38,16 +75,18 @@ const ScoreGrade = () => {
         {/* //cards */}
         <div className="grid lg:grid-cols-3 space-y-5 lg:space-y-0 mt-10 mx-5">
           <div className="bg-[#FFF0EF] p-5 rounded-xl lg:w-[200px]">
-            <p className="font-bold">Total Questions</p>
-            <p className="text-2xl text-[#FF6A64]">5</p>
+            <p className="font-bold">OverAll Score Rate</p>
+            <p className="text-2xl text-[#FF6A64]">{score.toFixed(2)} %</p>
           </div>
           <div className="bg-[#FFF0EF] p-5 rounded-xl lg:w-[200px] ">
-            <p className="font-bold">Time Per Question</p>
-            <p className="text-2xl  text-[#FF6A64]">30 sec</p>
+            <p className="font-bold">Total Test Taken </p>
+            <p className="text-2xl  text-[#FF6A64]">{userInfo?.length}</p>
           </div>
           <div className="bg-[#FFF0EF] p-5 rounded-xl lg:w-[200px]">
-            <p className="font-bold">Marks Per Question</p>
-            <p className="text-2xl text-[#FF6A64]">5 Marks</p>
+            <p className="font-bold">Certificates Achieved</p>
+            <p className="text-2xl text-[#FF6A64]">
+              {certificatesAchieved?.length}
+            </p>
           </div>
         </div>
         {/* topics */}

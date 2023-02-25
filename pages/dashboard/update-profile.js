@@ -55,7 +55,7 @@ const UpdateProfile = () => {
               <div>
                 <p className="text-sm">Full Name (Name Can Be Changed Once)</p>
                 <input
-                  className="border px-2 py-2 w-[400px] rounded bg-pink-100"
+                  className="border px-2 py-2 lg:w-[400px] w-[300px] rounded bg-pink-100"
                   type="text"
                   placeholder={userData[0]?.name}
                   {...register('name', { required: true })}
@@ -66,7 +66,7 @@ const UpdateProfile = () => {
                   Email Address (Email Can’t Be Changed)
                 </p>
                 <input
-                  className="border px-2 py-2  w-[400px] rounded bg-pink-100"
+                  className="border px-2 py-2  lg:w-[400px] w-[300px] rounded bg-pink-100"
                   type="text"
                   placeholder={userData[0]?.email}
                   disabled

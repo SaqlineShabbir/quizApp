@@ -5,7 +5,7 @@ import DashboardLayout from '../../components/dashboard/layout';
 
 const PostQuestion = ({ categoryData }) => {
   const [categoryId, setCetegoryId] = useState('');
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   //post data to server
   const onSubmit = async (data) => {
@@ -15,6 +15,7 @@ const PostQuestion = ({ categoryData }) => {
         `https://quiz-app-backend-blond.vercel.app/quiz/addquiz/${categoryId}`,
         data
       );
+      reset();
     } catch (err) {
       console.log(err);
     }

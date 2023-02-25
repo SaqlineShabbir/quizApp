@@ -31,8 +31,8 @@ const DashBoard = ({ categoryData }) => {
           </div>
           {/* //achievement */}
           <div>
-            <div className="lg:flex mt-20  space-x-10">
-              <div className="w-1/2 ">
+            <div className="lg:flex mt-20  lg:space-x-10">
+              <div className="lg:w-1/2 ">
                 <p className="font-bold">Achievements</p>
                 <div className="pt-3 pl-2">
                   <ProgressBar progress={80} />
@@ -68,11 +68,11 @@ const DashBoard = ({ categoryData }) => {
 
               {/* //quiz categoryes */}
 
-              <div className="w-1/2 ">
+              <div className="w-1/2 lg:my-0 my-8">
                 <div>
                   <p className="font-bold">Featured Quiz Categories</p>
                 </div>
-                <div className="grid grid-cols-2 ">
+                <div className="grid lg:grid-cols-2 ">
                   {categoryData?.map((quizCategory) => (
                     <Quiz key={quizCategory._id} quizCategory={quizCategory} />
                   ))}
