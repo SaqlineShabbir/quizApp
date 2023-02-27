@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const Quiz = ({ quizCategory }) => {
-  console.log(quizCategory);
   return (
     <div className="p-3 relative">
       <Link href={`/dashboard/quiz-test/${quizCategory._id}`}>

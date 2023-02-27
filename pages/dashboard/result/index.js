@@ -1,15 +1,16 @@
 import axios from 'axios';
+import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
+import { FaMedal } from 'react-icons/fa';
+import { ImSad2 } from 'react-icons/im';
 import { AuthContext } from '../../../context/AuthProvider';
-
 const Index = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
-  console.log('daaa', data);
-  console.log(data?.length);
-
+  console.log('parse data', data);
   useEffect(() => {
     const dataString = localStorage.getItem('questions');
+    console.log('datastring', JSON.parse(dataString));
     setData(JSON.parse(dataString));
   }, []);
   useEffect(() => {
@@ -21,7 +22,6 @@ const Index = () => {
   useEffect(() => {
     putUserResult(data?.score, data?.id, user);
   }, [user, data?.score, data?.id]);
-
   const putUserResult = async (score, id, user) => {
     console.log(user?.email);
     try {
@@ -35,8 +35,8 @@ const Index = () => {
         }
       );
 
-      console.log(res);
-      console.log(data);
+      console.log('response', res);
+      console.log('da', data);
     } catch (err) {
       console.log(err);
     }
@@ -44,7 +44,32 @@ const Index = () => {
 
   //loop
 
-  return <div>This is result {data?.score}%</div>;
+  return (
+    <div className="flex justify-center my-20">
+      <div>
+        {data?.score >= 80 ? (
+          <div>
+            <FaMedal size={100} color="#FFAE96" className="mt-1" />
+            <p className="font-bold"> Congratulations you have passed</p>
+          </div>
+        ) : (
+          <div>
+            <ImSad2 size={100} color="#FFAE96" className="mt-1" />
+            <div className="flex  justify-center">
+              <p className="font-bold">
+                Were Sorry You failed to Score above 80%
+              </p>
+            </div>
+          </div>
+        )}
+        <div className="pr-20">You Scored {data?.score}%</div>
+
+        <Link href="/dashboard/result/review-quiz">
+          <button className="my-20 font-bold text-sm">Review Quiz</button>
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export default Index;

@@ -7,8 +7,6 @@ import img from '../../../assets/images/Cap.PNG';
 import DashboardLayout from '../../../components/dashboard/layout';
 
 const QuizDetails = ({ categoryData }) => {
-  console.log(categoryData);
-
   const router = useRouter();
   const quizId = router.query.quizid;
 
