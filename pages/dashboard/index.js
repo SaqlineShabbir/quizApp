@@ -15,10 +15,11 @@ const DashBoard = ({ categoryData }) => {
             <div>
               {user?.photoURL && (
                 <Image
+                  className="rounded-lg"
                   src={user?.photoURL}
                   alt="user"
-                  width={180}
-                  height={130}
+                  width={200}
+                  height={150}
                 />
               )}
             </div>
@@ -33,12 +34,14 @@ const DashBoard = ({ categoryData }) => {
           <div>
             <div className="lg:flex mt-20  lg:space-x-10">
               <div className="lg:w-1/2 ">
-                <p className="font-bold">Achievements</p>
-                <div className="pt-3 pl-2">
-                  <ProgressBar progress={80} />
+                <div className="flex ">
+                  <p className="font-bold  py-3">Achievements</p>
+                  <div className="pt-3 pl-2">
+                    {/* <ProgressBar progress={80} /> */}
+                  </div>
                 </div>
 
-                <div className="shadow-lg px-5 rounded-lg pb-5">
+                <div className="shadow-lg px-5 rounded-lg pb-5 border">
                   <div className="mt-10 w-[100%]">
                     <p>Quiz Topics</p>
                     <div className="flex mt-3 pb-3">

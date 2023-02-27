@@ -52,7 +52,7 @@ const MakeAdmin = ({ users }) => {
 export default MakeAdmin;
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch('https://quiz-app-backend-blond.vercel.app/user');
+  const res = await fetch('https://quiz-app-backend-blond.vercel.app/user/');
   const users = await res.json();
 
   // Pass data to the page via props
