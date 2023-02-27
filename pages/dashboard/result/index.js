@@ -7,9 +7,10 @@ import { AuthContext } from '../../../context/AuthProvider';
 const Index = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
-
+  console.log('parse data', data);
   useEffect(() => {
     const dataString = localStorage.getItem('questions');
+    console.log('datastring', JSON.parse(dataString));
     setData(JSON.parse(dataString));
   }, []);
   useEffect(() => {
@@ -21,7 +22,6 @@ const Index = () => {
   useEffect(() => {
     putUserResult(data?.score, data?.id, user);
   }, [user, data?.score, data?.id]);
-
   const putUserResult = async (score, id, user) => {
     try {
       const res = await axios.put(
@@ -34,8 +34,8 @@ const Index = () => {
         }
       );
 
-      console.log(res);
-      console.log(data);
+      console.log('response', res);
+      console.log('da', data);
     } catch (err) {
       console.log(err);
     }

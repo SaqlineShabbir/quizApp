@@ -9,7 +9,7 @@ const ScoreGrade = () => {
 
   // filter how many quiz test user took
   const userInfo = userData[0]?.attainQuizs?.filter((attain) => attain.id);
-
+  console.log('userinfo', user?.email, userData, userInfo);
   //calculate overall per
   let score = 0;
   let total = 0;
@@ -21,6 +21,7 @@ const ScoreGrade = () => {
   });
 
   useEffect(() => {
+    console.log('res');
     getUser(user?.email);
   }, [user]);
 
@@ -31,6 +32,7 @@ const ScoreGrade = () => {
       );
 
       setUserData(res.data);
+      console.log('res', res.data);
     } catch (err) {
       console.log(err);
     }

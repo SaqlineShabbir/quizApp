@@ -63,7 +63,7 @@ const SingleQuiz = ({ categoryData }) => {
   //handle result
   useEffect(() => {
     localStorage.setItem('questions', JSON.stringify({ id, score, questions }));
-  }, [score, id]);
+  }, [score, id, questions]);
 
   // handle timer
   useEffect(() => {
