@@ -23,6 +23,7 @@ const Index = () => {
   }, [user, data?.score, data?.id]);
 
   const putUserResult = async (score, id, user) => {
+    console.log(user?.email);
     try {
       const res = await axios.put(
         `https://quiz-app-backend-blond.vercel.app/user/${user?.email}`,
