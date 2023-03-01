@@ -12,13 +12,9 @@ export default function middleware(req) {
   if (
     userRole === 'user' &&
     (url.includes('/dashboard/make-admin') ||
-      url.includes(
-        '/dashboard/delete-category' ||
-          url.includes(
-            '/dashboard/post-question' ||
-              url.includes('/dashboard/post-category')
-          )
-      ))
+      url.includes('/dashboard/delete-category') ||
+      url.includes('/dashboard/post-question') ||
+      url.includes('/dashboard/post-category'))
   ) {
     return NextResponse.redirect('http://localhost:3000/dashboard');
   }

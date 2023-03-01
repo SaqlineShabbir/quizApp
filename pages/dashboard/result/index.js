@@ -18,6 +18,33 @@ const Index = () => {
       window.history.go(1);
     };
   }, []);
+<<<<<<< HEAD
+  useEffect(() => {
+    putUserResult(data?.score, data?.id, user);
+  }, [user, data?.score, data?.id]);
+  const putUserResult = async (score, id, user) => {
+    console.log(user?.email);
+    try {
+      const res = await axios.put(
+        `https://quiz-app-backend-blond.vercel.app/user/${user?.email}`,
+        {
+          attainQuizs: {
+            id: id,
+            score: score,
+          },
+        }
+      );
+
+      console.log('response', res);
+      console.log('da', data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //loop
+=======
+>>>>>>> dev/sabbir
 
   return (
     <div className="flex justify-center my-20">

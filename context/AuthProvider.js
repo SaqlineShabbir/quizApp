@@ -49,6 +49,7 @@ const AuthProvider = ({ children }) => {
   // login user
   const signInUser = (email, password) => {
     Cookies.set('loggedin', 'true');
+    router.push('/');
     //getting user
     getUser(email);
 
