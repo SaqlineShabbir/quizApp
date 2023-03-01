@@ -28,7 +28,7 @@ const reducer = (state, action) => {
 };
 const SingleQuiz = ({ categoryData }) => {
   const { user } = useContext(AuthContext);
-
+  console.log(user);
   const router = useRouter();
   const { id } = router.query;
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -120,6 +120,7 @@ const SingleQuiz = ({ categoryData }) => {
             {
               score: score,
               id: getRes?.data[0]._id,
+              name: user?.displayName,
               email: user?.email,
               quizCategoryId: id,
               attempts: Number(getRes?.data[0].attempts) + 1,
@@ -137,6 +138,7 @@ const SingleQuiz = ({ categoryData }) => {
             `https://quiz-app-backend-blond.vercel.app/result`,
             {
               email: user?.email,
+              name: user?.displayName,
               quizCategoryId: id,
               attempts: '1',
               lastAnswered: questions,

@@ -8,7 +8,7 @@ import { AuthContext } from '../context/AuthProvider';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signInUser, signInUsingGoogle } = useContext(AuthContext);
+  const { signInUser, signInUsingGoogle, getUser } = useContext(AuthContext);
   const [error, setError] = useState('');
 
   const router = useRouter();
@@ -23,11 +23,15 @@ const Login = () => {
     signInUser(email, password)
       .then((result) => {
         const user = result.user;
+
         console.log(user);
       })
       .catch((error) => setError(error.message));
   };
-
+  const handleSignInButton = () => {
+    console.log('calling get user');
+    getUser(email);
+  };
   return (
     <div className="lg:flex  overflow-y-scroll h-full w-[100%]">
       <div className="bg-red-100 lg:w-[50%] flex flex-col justify-center items-center px-20 lg:py-0 py-10">
@@ -64,6 +68,7 @@ const Login = () => {
               />
               <p className="text-red-400">{error}</p>
               <button
+                onClick={handleSignInButton}
                 type="submit"
                 className="bg-red-400  py-5 px-10 lg:w-[400px] rounded-full block w-full"
               >

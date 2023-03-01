@@ -6,7 +6,12 @@ import Quiz from '../../components/dashboard/quizUser/Quiz';
 import { AuthContext } from '../../context/AuthProvider';
 
 const DashBoard = ({ categoryData }) => {
-  const { user } = useContext(AuthContext);
+  const { user, information } = useContext(AuthContext);
+
+  // filter how many quiz test user took
+  const exactUserInformation = information?.filter(
+    (info) => info?.email === user?.email
+  );
   return (
     <>
       <DashboardLayout>
@@ -35,29 +40,25 @@ const DashBoard = ({ categoryData }) => {
             <div className="lg:flex mt-20  lg:space-x-10">
               <div className="lg:w-1/2 ">
                 <div className="flex ">
-                  <p className="font-bold  py-3">Achievements</p>
+                  <p className="font-bold  pb-2">Achievements</p>
                   <div className="pt-3 pl-2">
                     {/* <ProgressBar progress={80} /> */}
                   </div>
                 </div>
 
-                <div className="shadow-lg px-5 rounded-lg pb-5 border">
+                <div className=" px-5 rounded-lg pb-5 border">
                   <div className="mt-10 w-[100%]">
-                    <p>Quiz Topics</p>
-                    <div className="flex mt-3 pb-3">
+                    <p className="font-bold">Quiz Topics</p>
+                    <div className="flex mt-3 pb-3 my-20">
                       <div className="space-y-2  ">
-                        <p>Beginner React Certification</p>
-                        <p>Beginner React Certification</p>
-                        <p>Beginner React Certification</p>
-                        <p>Beginner React Certification</p>
-                        <p>Beginner React Certification</p>
+                        {exactUserInformation?.map((ex) => (
+                          <p key={ex._id}>{ex?.quizCategoryName}</p>
+                        ))}
                       </div>
                       <div className="space-y-2  pl-10 ">
-                        <p>80%</p>
-                        <p>70%</p>
-                        <p>60%</p>
-                        <p>50%</p>
-                        <p>40%</p>
+                        {exactUserInformation?.map((ex) => (
+                          <p key={ex._id}>{ex?.score}%</p>
+                        ))}
                       </div>
                     </div>
                     <hr />
@@ -76,7 +77,7 @@ const DashBoard = ({ categoryData }) => {
                   <p className="font-bold">Featured Quiz Categories</p>
                 </div>
                 <div className="grid lg:grid-cols-2 ">
-                  {categoryData?.map((quizCategory) => (
+                  {categoryData?.slice(0, 4).map((quizCategory) => (
                     <Quiz key={quizCategory._id} quizCategory={quizCategory} />
                   ))}
                 </div>

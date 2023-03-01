@@ -1,45 +1,39 @@
-import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import DashboardLayout from '../../components/dashboard/layout';
 import { AuthContext } from '../../context/AuthProvider';
 
 const ScoreGrade = () => {
   const { user } = useContext(AuthContext);
-  const [userData, setUserData] = useState([]);
+
+  const [information, setInformation] = useState([]);
 
   // filter how many quiz test user took
-  const userInfo = userData[0]?.attainQuizs?.filter((attain) => attain.id);
-  console.log('userinfo', user?.email, userData, userInfo);
+  const exactUserInformation = information?.filter(
+    (info) => info?.email === user?.email
+  );
+  // console.log('exact', exactUserInformation);
   //calculate overall per
   let score = 0;
   let total = 0;
   // calculate answer
-  userInfo?.forEach((element) => {
-    total += element.score;
+  exactUserInformation?.forEach((element) => {
+    console.log(Number(element.score));
+    total += Number(element?.score);
 
-    score = (total / (userInfo?.length * 100)) * 100;
+    score = (total / (exactUserInformation?.length * 100)) * 100;
   });
 
-  useEffect(() => {
-    console.log('res');
-    getUser(user?.email);
-  }, [user]);
-
-  const getUser = async (email) => {
-    try {
-      const res = await axios.get(
-        `https://quiz-app-backend-blond.vercel.app/user/${email}`
-      );
-
-      setUserData(res.data);
-      console.log('res', res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   //Certificates Achieved calculation
-  const certificatesAchieved = userInfo?.filter((info) => info.score >= 80);
+  const certificatesAchieved = exactUserInformation?.filter(
+    (info) => info.score >= 80
+  );
+
+  useEffect(() => {
+    fetch(`https://quiz-app-backend-blond.vercel.app/result`)
+      .then((res) => res.json())
+      .then((data) => setInformation(data));
+  }, []);
+  // console.log('information', information);
 
   return (
     <DashboardLayout>
@@ -78,11 +72,15 @@ const ScoreGrade = () => {
         <div className="grid lg:grid-cols-3 space-y-5 lg:space-y-0 mt-10 mx-5">
           <div className="bg-[#FFF0EF] p-5 rounded-xl lg:w-[200px]">
             <p className="font-bold">OverAll Score Rate</p>
-            <p className="text-2xl text-[#FF6A64]">{score.toFixed(2)} %</p>
+            <p className="text-2xl text-[#FF6A64]">
+              {Number(score.toFixed(2))} %
+            </p>
           </div>
           <div className="bg-[#FFF0EF] p-5 rounded-xl lg:w-[200px] ">
             <p className="font-bold">Total Test Taken </p>
-            <p className="text-2xl  text-[#FF6A64]">{userInfo?.length}</p>
+            <p className="text-2xl  text-[#FF6A64]">
+              {exactUserInformation?.length}
+            </p>
           </div>
           <div className="bg-[#FFF0EF] p-5 rounded-xl lg:w-[200px]">
             <p className="font-bold">Certificates Achieved</p>
@@ -97,55 +95,45 @@ const ScoreGrade = () => {
             <div className="py-5">
               <p className="text-lg pb-2 ">Quiz Topics</p>
               <div className="space-y-2">
-                <p>1. Beginner React Certification</p>
-                <p>2. Beginner React Certification</p>
-                <p>3. Beginner React Certification</p>
-                <p>4. Beginner React Certification</p>
-                <p>5. Beginner React Certification</p>
+                {exactUserInformation?.map((ex) => (
+                  <p key={ex._id}>{ex?.quizCategoryName}</p>
+                ))}
               </div>
             </div>
             {/* 2 */}
             <div className="py-5">
               <p className="text-lg pb-2 ">Test Attempts</p>
               <div className="space-y-2">
-                <p>3 Attempts</p>
-                <p>3 Attempts</p>
-                <p>3 Attempts</p>
-                <p>3 Attempts</p>
-                <p>3 Attempts</p>
+                {exactUserInformation?.map((ex) => (
+                  <p key={ex._id}>{ex?.attempts}</p>
+                ))}
               </div>
             </div>
             {/* 3 */}
             <div className="py-5">
               <p className="text-lg pb-2 ">Score Rate (%)</p>
               <div className="space-y-2">
-                <p>80%</p>
-                <p>80%</p>
-                <p>80%</p>
-                <p>80%</p>
-                <p>80%</p>
+                {exactUserInformation?.map((ex) => (
+                  <p key={ex._id}>{ex?.score}%</p>
+                ))}
               </div>
             </div>
             {/* 4 */}
             <div className="py-5">
               <p className="text-lg pb-2 ">Grade</p>
               <div className="space-y-2">
-                <p>B+</p>
-                <p>B+</p>
-                <p>B+</p>
-                <p>B+</p>
-                <p>B+</p>
+                {exactUserInformation?.map((ex) =>
+                  ex.score >= 80 ? <p>A+</p> : <p>Fail</p>
+                )}
               </div>
             </div>
             {/* 5 */}
             <div className="py-5">
               <p className="text-lg pb-2 ">Certifications</p>
               <div className="space-y-2">
-                <p>Available</p>
-                <p>Available</p>
-                <p>Available</p>
-                <p>Available</p>
-                <p>Available</p>
+                {exactUserInformation?.map((ex) =>
+                  ex.score >= 80 ? <p>Available</p> : <p>Unavailable</p>
+                )}
               </div>
             </div>
           </div>

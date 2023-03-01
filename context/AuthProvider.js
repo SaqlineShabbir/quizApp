@@ -21,7 +21,13 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const provider = new GoogleAuthProvider();
   const [userData, setUserData] = useState([]);
+  const [information, setInformation] = useState([]);
 
+  useEffect(() => {
+    fetch(`https://quiz-app-backend-blond.vercel.app/result`)
+      .then((res) => res.json())
+      .then((data) => setInformation(data));
+  }, []);
   // register user
   const createUser = (email, password, name) => {
     return createUserWithEmailAndPassword(auth, email, password).then(() => {
@@ -51,11 +57,10 @@ const AuthProvider = ({ children }) => {
     Cookies.set('loggedin', 'true');
     router.push('/');
     //getting user
-    getUser(email);
 
     return signInWithEmailAndPassword(auth, email, password);
   };
-  console.log('userrrrr', userData);
+  // console.log('userrrrr', userData);
   //google sign in
   const signInUsingGoogle = () => {
     return signInWithPopup(auth, provider)
@@ -134,6 +139,8 @@ const AuthProvider = ({ children }) => {
     logOutUser,
     signInUsingGoogle,
     user,
+    getUser,
+    information,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

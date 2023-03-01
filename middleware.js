@@ -10,7 +10,7 @@ export default function middleware(req) {
   }
 
   if (
-    userRole === 'user' &&
+    userRole !== 'admin' &&
     (url.includes('/dashboard/make-admin') ||
       url.includes('/dashboard/delete-category') ||
       url.includes('/dashboard/post-question') ||
