@@ -1,7 +1,15 @@
+import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
 import ProgressBar from '../../../components/dashboard/quizUser/questions/ProgressBar';
+import { AuthContext } from '../../../context/AuthProvider';
 
 const reducer = (state, action) => {
   // console.log(action.payLoad.selectAnswer);
@@ -19,6 +27,8 @@ const reducer = (state, action) => {
   }
 };
 const SingleQuiz = ({ categoryData }) => {
+  const { user } = useContext(AuthContext);
+
   const router = useRouter();
   const { id } = router.query;
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -26,11 +36,13 @@ const SingleQuiz = ({ categoryData }) => {
   const [seconds, setSeconds] = useState(30);
   const [countDown, setCountDown] = useState(30);
   const timerId = useRef();
-
+  console.log(id);
   // get selected answer
   const [selected, setSelected] = useState('');
   const initialQuestions = categoryData[0]?.quizs;
   const [questions, dispatch] = useReducer(reducer, initialQuestions);
+  console.log('qqqq', questions);
+  //handle answers  here
   const handleAnswer = (id, selectAnswer) => {
     dispatch({
       type: 'ANSWERED',
@@ -78,6 +90,24 @@ const SingleQuiz = ({ categoryData }) => {
       router.push('/dashboard/result');
     }
   });
+  //put user results to  backend
+  const handlePutUserInfo = async (score, id, user) => {
+    try {
+      const res = await axios.put(
+        `https://quiz-app-backend-blond.vercel.app/user/${user?.email}`,
+        {
+          attainQuizs: {
+            id: id,
+            score: score,
+          },
+        }
+      );
+
+      console.log('response from id  page', res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -102,7 +132,7 @@ const SingleQuiz = ({ categoryData }) => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="w-6 h-6"
+                  className="w-6 h-6"
                 >
                   <path
                     stroke-linecap="round"
@@ -124,7 +154,7 @@ const SingleQuiz = ({ categoryData }) => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="w-6 h-6"
+                  className="w-6 h-6"
                 >
                   <path
                     stroke-linecap="round"
@@ -146,7 +176,7 @@ const SingleQuiz = ({ categoryData }) => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="w-6 h-6"
+                  className="w-6 h-6"
                 >
                   <path
                     stroke-linecap="round"
@@ -168,7 +198,7 @@ const SingleQuiz = ({ categoryData }) => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="w-6 h-6"
+                  className="w-6 h-6"
                 >
                   <path
                     stroke-linecap="round"
@@ -191,7 +221,10 @@ const SingleQuiz = ({ categoryData }) => {
             </button> */}
             {currentQuestion === questions.length - 1 ? (
               <Link href={'/dashboard/result'}>
-                <button className="bg-gradient-to-l from-[#FF6961] border  px-3 py-1 rounded-xl">
+                <button
+                  onClick={() => handlePutUserInfo(score, id, user)}
+                  className="bg-gradient-to-l from-[#FF6961] border  px-3 py-1 rounded-xl"
+                >
                   Show Result
                 </button>
               </Link>

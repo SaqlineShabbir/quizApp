@@ -3,7 +3,7 @@ import Quiz from './Quiz';
 
 const QuizHome = ({ categoryData }) => {
   return (
-    <div className="border border-[#FFAE96] rounded p-5 h-[88vh]">
+    <div className="border border-[#FFAE96] rounded p-5 min-h-full">
       <div className="lg:flex justify-between pb-5">
         <div>
           <p className="text-2xl  font-bold">Select Quiz Topic for Test</p>

@@ -4,6 +4,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -26,6 +27,8 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password).then(() => {
       const newUser = { email, displayName: name };
       setUser(newUser);
+
+      verifyEmail();
       //saving user to backend
       saveUser(name, email);
       //getting user
@@ -51,7 +54,7 @@ const AuthProvider = ({ children }) => {
 
     return signInWithEmailAndPassword(auth, email, password);
   };
-
+  console.log('userrrrr', userData);
   //google sign in
   const signInUsingGoogle = () => {
     return signInWithPopup(auth, provider)
@@ -62,9 +65,12 @@ const AuthProvider = ({ children }) => {
         const user = result.user;
         console.log('goo user', user);
         setUser(user);
-        saveUser(user.displayName, user.email);
+        Cookies.set('loggedin', 'true');
+
+        saveUser(user?.displayName, user?.email);
 
         //getting user
+        console.log('should i get');
         getUser(user?.email);
 
         // ...
@@ -77,6 +83,13 @@ const AuthProvider = ({ children }) => {
   const logOutUser = () => {
     return signOut(auth);
   };
+  //verify email
+  const verifyEmail = () => {
+    sendEmailVerification(auth.currentUser).then(() => {
+      alert('please check email and verify');
+    });
+  };
+
   //observe  user
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -101,28 +114,18 @@ const AuthProvider = ({ children }) => {
   //get user from  backend
 
   const getUser = async (email) => {
+    console.log('getting');
     try {
       const res = await axios.get(
         `https://quiz-app-backend-blond.vercel.app/user/${email}`
       );
-
+      console.log(res);
       setUserData(res.data);
+      Cookies.set('role', res?.data[0].role);
     } catch (err) {
       console.log(err);
     }
   };
-
-  // const allUsers =()=>{
-  //   axios
-  //     .get('https://quiz-app-backend-blond.vercel.app/user'
-  //     )
-  //     .then((response) => {
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => (error) => {
-  //       console.log(error.message);
-  //     });
-  // }
 
   const authInfo = {
     createUser,

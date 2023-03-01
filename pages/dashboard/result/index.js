@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
 import { FaMedal } from 'react-icons/fa';
@@ -7,10 +6,10 @@ import { AuthContext } from '../../../context/AuthProvider';
 const Index = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
-  console.log('parse data', data);
+
   useEffect(() => {
     const dataString = localStorage.getItem('questions');
-    console.log('datastring', JSON.parse(dataString));
+
     setData(JSON.parse(dataString));
   }, []);
   useEffect(() => {
@@ -19,6 +18,7 @@ const Index = () => {
       window.history.go(1);
     };
   }, []);
+<<<<<<< HEAD
   useEffect(() => {
     putUserResult(data?.score, data?.id, user);
   }, [user, data?.score, data?.id]);
@@ -43,6 +43,8 @@ const Index = () => {
   };
 
   //loop
+=======
+>>>>>>> dev/sabbir
 
   return (
     <div className="flex justify-center my-20">

@@ -6,11 +6,11 @@ const Quiz = ({ quizCategory }) => {
     <div className="p-3 relative">
       <Link href={`/dashboard/quiz-test/${quizCategory._id}`}>
         {quizCategory?.postImage && (
-          <div>
+          <div className="">
             <Image
               className="rounded-xl "
-              height={130}
-              width={155}
+              height={230}
+              width={255}
               src={quizCategory?.postImage}
               alt=""
             />

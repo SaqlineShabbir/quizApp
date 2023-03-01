@@ -11,7 +11,7 @@ const QuizDetails = ({ categoryData }) => {
   const quizId = router.query.quizid;
 
   const singleQuiz = categoryData.find((q) => q._id === quizId);
-  console.log('sing', quizId);
+
   return (
     <DashboardLayout>
       <div className="border border-[#FFAE96] h-100% p-3 lg:p-5 rounded">
