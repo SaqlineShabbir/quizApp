@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import FileBase64 from 'react-file-base64';
 import { useForm } from 'react-hook-form';
@@ -41,7 +42,7 @@ const PostCategory = () => {
             />
             {postImage && (
               <div className="w-1/5">
-                <img src={postImage} alt="photo" />
+                <Image src={postImage} alt="photo" />
               </div>
             )}
             <br />

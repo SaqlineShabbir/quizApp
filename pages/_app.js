@@ -1,4 +1,3 @@
-import { SessionProvider } from 'next-auth/react';
 import { Provider } from 'react-redux';
 import { ToggleProvider } from '../components/dashboard/provider/ToggleProvider';
 import AuthProvider from '../context/AuthProvider';
@@ -8,11 +7,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <ToggleProvider>
       <AuthProvider>
-        <SessionProvider session={session}>
-          <Provider store={store}>
-            <Component {...pageProps} />
-          </Provider>
-        </SessionProvider>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </AuthProvider>
     </ToggleProvider>
   );
