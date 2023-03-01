@@ -1,5 +1,5 @@
-import Snippet from './snippet';
 import { FileIcon, FolderIcon, JsIcon } from './icons';
+import Snippet from './snippet';
 
 export default function Docs() {
   return (
@@ -125,8 +125,8 @@ export default function Docs() {
             <span className="px-2 font-medium">icons</span> :
             <p className="pl-1">
               As each <strong>sidenav-item</strong> has an icon, this sub-folder
-              contains the icons of each sidenav-item. You don't need this
-              folder if you are using a package for icons such as
+              contains the icons of each sidenav-item. You dont need this folder
+              if you are using a package for icons such as
               <strong className="px-1">react-icons</strong>,
               <strong className="px-1">font-awesome</strong>
               or other
@@ -135,7 +135,7 @@ export default function Docs() {
           <div className="flex flex-wrap md:flex-nowrap pl-6 mt-6">
             <JsIcon /> <span className="px-2 font-medium">data.js</span> :
             <p className="pl-1">
-              It's in this file that you will add routes for each sidenav-item.
+              Its in this file that you will add routes for each sidenav-item.
               it is an array of objects.
             </p>
           </div>
@@ -200,8 +200,8 @@ export default function Docs() {
             <p className="pl-1">
               Contains the
               <strong className="px-1">Topnavigation</strong>component. You can
-              customize it or replace it with your own navbar but don't forget
-              to add a button to toggle sidenav on mobile
+              customize it or replace it with your own navbar but dont forget to
+              add a button to toggle sidenav on mobile
             </p>
           </div>
         </div>
@@ -224,7 +224,7 @@ export default function Docs() {
             file
           </li>
           <li className="mb-3">
-            If your routes don't exist yet, create your routes in the
+            If your routes dont exist yet, create your routes in the
             <strong className="px-1">pages</strong>directory
           </li>
           <li className="mb-3">
@@ -274,7 +274,7 @@ export default function Docs() {
         <h2 className="text-2xl font-medium">Customization</h2>
         <p className="mt-5">
           You can customize everything according to your preferences if it
-          doesn't suit you. What we have done is just provide a solid structure
+          doesnt suit you. What we have done is just provide a solid structure
           for better scalability and readability of the code.
         </p>
         <p className="mt-5">
@@ -303,7 +303,7 @@ export default function Docs() {
       <section className="px-3 md:px-8 mt-16">
         <h2 className="text-2xl font-medium">Components</h2>
         <p className="mt-5">
-          If you'll need some UI components for Tailwind CSS such as modal,
+          If youll need some UI components for Tailwind CSS such as modal,
           accordion, dropdown, tab or other components, you can check out
           <a
             target="_blank"
