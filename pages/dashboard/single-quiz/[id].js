@@ -36,12 +36,12 @@ const SingleQuiz = ({ categoryData }) => {
   const [seconds, setSeconds] = useState(30);
   const [countDown, setCountDown] = useState(30);
   const timerId = useRef();
-
+  console.log(id);
   // get selected answer
   const [selected, setSelected] = useState('');
   const initialQuestions = categoryData[0]?.quizs;
   const [questions, dispatch] = useReducer(reducer, initialQuestions);
-
+  console.log('qqqq', questions);
   //handle answers  here
   const handleAnswer = (id, selectAnswer) => {
     dispatch({

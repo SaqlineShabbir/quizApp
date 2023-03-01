@@ -48,10 +48,11 @@ export default function SidenavItems({ users }) {
   const handleLogOut = () => {
     logOutUser();
     Cookies.remove('loggedin');
+    Cookies.remove('role');
     Router.push('/');
   };
   return (
-    <div className="">
+    <div className="overflow-y-scroll   h-full">
       <Link href="/dashboard">
         <div className="flex  hover:bg-orange-500 active:bg-orange-700 focus:outline-none focus:ring focus:ring-orange-300 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer">
           <span>
@@ -156,6 +157,18 @@ export default function SidenavItems({ users }) {
               <CreditsIcon />
             </span>
             <p>Add Question</p>
+          </div>
+        </Link>
+      )}
+      {userData[0]?.role === 'admin' && (
+        <Link href="/dashboard/manage-students">
+          <div
+            className={` flex active:bg-orange-500 hover:bg-orange-500 rounded-full text-black my-4 mx-2 py-3 px-2 lg:w-[215px] space-x-2 cursor-pointer`}
+          >
+            <span>
+              <CreditsIcon />
+            </span>
+            <p>Manage Students</p>
           </div>
         </Link>
       )}
