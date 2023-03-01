@@ -6,7 +6,7 @@ export default function middleware(req) {
   let url = req.url;
 
   if (!verify && url.includes('/dashboard')) {
-    return NextResponse.redirect('https://quiz-app-48az.vercel.app/sign-in');
+    return NextResponse.redirect('http://localhost:3000/sign-in');
   }
 
   if (
@@ -16,6 +16,6 @@ export default function middleware(req) {
       url.includes('/dashboard/post-question') ||
       url.includes('/dashboard/post-category'))
   ) {
-    return NextResponse.redirect('https://quiz-app-48az.vercel.app/dashboard');
+    return NextResponse.redirect('http://localhost:3000/dashboard');
   }
 }

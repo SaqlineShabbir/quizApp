@@ -92,18 +92,62 @@ const SingleQuiz = ({ categoryData }) => {
   });
   //put user results to  backend
   const handlePutUserInfo = async (score, id, user) => {
-    try {
-      const res = await axios.put(
-        `https://quiz-app-backend-blond.vercel.app/user/${user?.email}`,
-        {
-          attainQuizs: {
-            id: id,
-            score: score,
-          },
-        }
-      );
+    // try {
+    //   const res = await axios.post(
+    //     `https://quiz-app-backend-blond.vercel.app/result`,
+    //     {
+    //       email: user?.email,
+    //       quizCategoryId: id,
+    //       attempts: '1',
+    //       lastAnswered: questions,
+    //     }
+    //   );
 
-      console.log('response from id  page', res);
+    //   console.log('response from id  page', res);
+    // } catch (err) {
+    //   console.log(err);
+    // }
+
+    try {
+      const getRes = await axios.get(
+        `https://quiz-app-backend-blond.vercel.app/result/${user?.email}/${id}`
+      );
+      console.log('get res', getRes);
+      if (getRes?.data.length) {
+        try {
+          const res = await axios.post(
+            `https://quiz-app-backend-blond.vercel.app/result`,
+            {
+              score: score,
+              id: getRes?.data[0]._id,
+              email: user?.email,
+              quizCategoryId: id,
+              attempts: Number(getRes?.data[0].attempts) + 1,
+              lastAnswered: questions,
+            }
+          );
+
+          console.log('post response 1', res);
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        try {
+          const res = await axios.post(
+            `https://quiz-app-backend-blond.vercel.app/result`,
+            {
+              email: user?.email,
+              quizCategoryId: id,
+              attempts: '1',
+              lastAnswered: questions,
+            }
+          );
+
+          console.log('post response 2', res);
+        } catch (err) {
+          console.log(err);
+        }
+      }
     } catch (err) {
       console.log(err);
     }

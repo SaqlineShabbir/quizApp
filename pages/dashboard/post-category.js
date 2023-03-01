@@ -42,7 +42,7 @@ const PostCategory = () => {
             />
             {postImage && (
               <div className="w-1/5">
-                <Image src={postImage} alt="photo" />
+                <Image width={200} height={200} src={postImage} alt="photo" />
               </div>
             )}
             <br />
