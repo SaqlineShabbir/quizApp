@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
 import DashboardLayout from '../../components/dashboard/layout';
 import { AuthContext } from '../../context/AuthProvider';
@@ -93,7 +94,7 @@ const ScoreGrade = () => {
         <div className="shadow shadow-lg my-10 rounded-lg mx-5">
           <div className="  flex px-7  space-x-12">
             <div className="py-5">
-              <p className="text-lg pb-2 ">Quiz Topics</p>
+              <p className="text-lg pb-4 ">Quiz Topics</p>
               <div className="space-y-2">
                 {exactUserInformation?.map((ex) => (
                   <p key={ex._id}>{ex?.quizCategoryName}</p>
@@ -102,7 +103,7 @@ const ScoreGrade = () => {
             </div>
             {/* 2 */}
             <div className="py-5">
-              <p className="text-lg pb-2 ">Test Attempts</p>
+              <p className="text-lg pb-4 ">Test Attempts</p>
               <div className="space-y-2">
                 {exactUserInformation?.map((ex) => (
                   <p key={ex._id}>{ex?.attempts}</p>
@@ -111,7 +112,7 @@ const ScoreGrade = () => {
             </div>
             {/* 3 */}
             <div className="py-5">
-              <p className="text-lg pb-2 ">Score Rate (%)</p>
+              <p className="text-lg pb-4 ">Score Rate (%)</p>
               <div className="space-y-2">
                 {exactUserInformation?.map((ex) => (
                   <p key={ex._id}>{ex?.score}%</p>
@@ -120,7 +121,7 @@ const ScoreGrade = () => {
             </div>
             {/* 4 */}
             <div className="py-5">
-              <p className="text-lg pb-2 ">Grade</p>
+              <p className="text-lg pb-4 ">Grade</p>
               <div className="space-y-2">
                 {exactUserInformation?.map((ex) =>
                   ex.score >= 80 ? <p>A+</p> : <p>Fail</p>
@@ -129,10 +130,18 @@ const ScoreGrade = () => {
             </div>
             {/* 5 */}
             <div className="py-5">
-              <p className="text-lg pb-2 ">Certifications</p>
+              <p className="text-lg pb-4 ">Certifications</p>
               <div className="space-y-2">
                 {exactUserInformation?.map((ex) =>
-                  ex.score >= 80 ? <p>Available</p> : <p>Unavailable</p>
+                  ex.score >= 80 ? (
+                    <Link href="/dashboard/download-certificates">
+                      <p className="text-green-500 cursor-pointer">Available</p>
+                    </Link>
+                  ) : (
+                    <Link href="/dashboard/quiz-test">
+                      <p className="text-red-500 cursor-pointer">Retake Test</p>
+                    </Link>
+                  )
                 )}
               </div>
             </div>

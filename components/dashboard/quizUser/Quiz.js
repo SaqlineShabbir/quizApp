@@ -17,7 +17,7 @@ const Quiz = ({ quizCategory }) => {
           </div>
         )}
       </Link>
-      <p className=" font-bold cursor-pointer absolute  bottom-8 left-8">
+      <p className=" font-bold text-sm   cursor-pointer absolute  bottom-11 left-8">
         {quizCategory?.name}
       </p>
     </div>

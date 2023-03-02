@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import DashboardLayout from '../../components/dashboard/layout';
+import { AuthContext } from '../../context/AuthProvider';
 
 const DownloadCertificates = () => {
+  const { user, information } = useContext(AuthContext);
+  // filter how many quiz test user took
+  const exactUserInformation = information
+    ?.filter((info) => info?.email === user?.email)
+    .filter((data) => data.score >= 80);
+  console.log(exactUserInformation);
   return (
     <DashboardLayout>
-      <div className=" border rounded  border-[#FFAE96]">
+      <div className=" border rounded  border-[#FFAE96] min-h-[100vh]">
         <div className="flex justify-between px-5  my-5">
           <p className="font-bold text-xl">List of Certifications</p>
           <div className="group hidden items-center ml-1 relative w-full md:flex lg:w-72">
@@ -34,6 +41,33 @@ const DownloadCertificates = () => {
               placeholder="Search"
             />
           </div>
+        </div>
+
+        <div>
+          {exactUserInformation.map((info) => (
+            <div
+              className="border rounded border-[#FFAE96] py-10 mx-5 my-5"
+              key={info._id}
+            >
+              <div className="px-20">
+                <p className="text-lg font-bold">{info?.quizCategoryName}</p>
+                <p className="text-orange-600">
+                  Scored {info?.score}% At {info?.attempts} Attempt Issued on{' '}
+                  {info?.updatedAt}
+                </p>
+                <div className="flex justify-end">
+                  <div>
+                    <button className="bg-green-500 rounded-full py-1 px-7 text-white">
+                      Share
+                    </button>
+                    <button className="bg-orange-400 text-white  rounded-full py-1 px-4 mx-2">
+                      Download
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </DashboardLayout>

@@ -15,7 +15,7 @@ const QuizHome = ({ categoryData }) => {
           </button>
         </div>
       </div>
-      <div className="grid lg:grid-cols-5 ">
+      <div className="grid lg:grid-cols-4 ">
         {categoryData?.map((quizCategory) => (
           <Quiz key={quizCategory._id} quizCategory={quizCategory} />
         ))}

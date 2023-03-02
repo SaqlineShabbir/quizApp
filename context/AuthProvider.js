@@ -78,7 +78,7 @@ const AuthProvider = ({ children }) => {
         //getting user
         console.log('should i get');
         getUser(user?.email);
-
+        router.push('/');
         // ...
       })
       .catch((error) => {

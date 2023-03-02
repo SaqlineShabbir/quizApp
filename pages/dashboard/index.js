@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { useContext } from 'react';
 import DashboardLayout from '../../components/dashboard/layout';
 import ProgressBar from '../../components/dashboard/quizUser/questions/ProgressBar';
-import Quiz from '../../components/dashboard/quizUser/Quiz';
 import { AuthContext } from '../../context/AuthProvider';
 
 const DashBoard = ({ categoryData }) => {
@@ -78,7 +77,23 @@ const DashBoard = ({ categoryData }) => {
                 </div>
                 <div className="grid lg:grid-cols-2 ">
                   {categoryData?.slice(0, 4).map((quizCategory) => (
-                    <Quiz key={quizCategory._id} quizCategory={quizCategory} />
+                    <div key={quizCategory._id} className="p-3 relative">
+                      {quizCategory?.postImage && (
+                        <div className="">
+                          <Image
+                            className="rounded-xl "
+                            height={205}
+                            width={245}
+                            src={quizCategory?.postImage}
+                            alt=""
+                          />
+                        </div>
+                      )}
+
+                      <p className=" font-bold cursor-pointer absolute  bottom-8 left-8">
+                        {quizCategory?.name}
+                      </p>
+                    </div>
                   ))}
                 </div>
               </div>
