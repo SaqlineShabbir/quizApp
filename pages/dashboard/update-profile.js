@@ -45,7 +45,7 @@ const UpdateProfile = () => {
 
   return (
     <DashboardLayout>
-      <div className="  border rounded  border-[#FFAE96]">
+      <div className="  border rounded  border-[#FFAE96] min-h-[100vh]">
         <div className="px-7 py-4">
           <h1 className="font-bold">My Profile</h1>
           <div className="flex  justify-between pt-5 ">

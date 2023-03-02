@@ -4,7 +4,7 @@ import DashboardLayout from '../../components/dashboard/layout';
 const ManageStudents = () => {
   return (
     <DashboardLayout>
-      <div className="border border-[#FFAE96] h-100% p-3 lg:p-5 rounded">
+      <div className="border border-[#FFAE96] h-100% p-3 lg:p-5 rounded min-h-[100vh]">
         <div className="flex justify-between px-5  my-5">
           <p className="font-bold text-xl">Manage Students</p>
           <div className="group hidden items-center ml-1 relative w-full md:flex lg:w-72">
