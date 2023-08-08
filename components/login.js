@@ -86,14 +86,23 @@ const Login = () => {
               </button> */}
                 {/* <p onClick={() => addUser()}>addUser</p> */}
                 <div className="flex justify-center">
-                  <div className=" cursor-pointer flex  space-x-5">
-                    <BsFacebook size={50} color="#FFAE96" className="mt-1" />
+                  <div className="  flex  space-x-5">
+                    <BsFacebook
+                      size={50}
+                      color="#FFAE96"
+                      className="mt-1 cursor-pointer"
+                    />
                     <AiFillGoogleCircle
                       size={60}
                       color="#FFAE96"
                       onClick={handleGoogleSignIn}
+                      className="cursor-pointer"
                     />
-                    <AiFillTwitterCircle size={60} color="#FFAE96" />
+                    <AiFillTwitterCircle
+                      size={60}
+                      color="#FFAE96"
+                      className="cursor-pointer"
+                    />
                   </div>
                 </div>
                 <div className="flex justify-center space-x-3">
