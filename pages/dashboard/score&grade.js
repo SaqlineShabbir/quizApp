@@ -38,7 +38,7 @@ const ScoreGrade = () => {
 
   return (
     <DashboardLayout>
-      <div className="  border rounded  border-[#FFAE96]">
+      <div className="  border rounded  border-[#FFAE96] min-h-[100vh]">
         <div className="flex justify-between px-5  my-5">
           <p className="font-bold text-xl">Summary</p>
           <div className="group hidden items-center ml-1 relative w-full md:flex lg:w-72">
@@ -91,8 +91,8 @@ const ScoreGrade = () => {
           </div>
         </div>
         {/* topics */}
-        <div className="shadow shadow-lg my-10 rounded-lg mx-5">
-          <div className="  flex px-7  space-x-12">
+        <div className="shadow-lg my-20 rounded-lg border mx-5">
+          <div className="  flex px-7  py-10  space-x-12">
             <div className="py-5">
               <p className="text-lg pb-4 ">Quiz Topics</p>
               <div className="space-y-2">

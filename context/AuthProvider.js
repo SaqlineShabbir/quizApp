@@ -49,13 +49,13 @@ const AuthProvider = ({ children }) => {
           setAuthError(error.message);
         });
 
-      router.push('/');
+      router.push('/dashboard');
     });
   };
   // login user
   const signInUser = (email, password) => {
     Cookies.set('loggedin', 'true');
-    router.push('/');
+    router.push('/dashboard');
     //getting user
 
     return signInWithEmailAndPassword(auth, email, password);
@@ -78,7 +78,7 @@ const AuthProvider = ({ children }) => {
         //getting user
         console.log('should i get');
         getUser(user?.email);
-        router.push('/');
+        router.push('/dashboard');
         // ...
       })
       .catch((error) => {

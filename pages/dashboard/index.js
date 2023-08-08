@@ -14,9 +14,9 @@ const DashBoard = ({ categoryData }) => {
   return (
     <>
       <DashboardLayout>
-        <div className="border border-[#FFAE96] h-100% p-3 lg:p-5 rounded ">
+        <div className="border border-[#FFAE96] h-100% p-3 lg:p-5 rounded  ">
           <div className="flex">
-            <div>
+            <div className="pr-2">
               {user?.photoURL && (
                 <Image
                   className="rounded-lg"
@@ -75,24 +75,24 @@ const DashBoard = ({ categoryData }) => {
                 <div>
                   <p className="font-bold">Featured Quiz Categories</p>
                 </div>
-                <div className="grid lg:grid-cols-2 ">
+                <div className="grid lg:grid-cols-2 gap-0 px-10">
                   {categoryData?.slice(0, 4).map((quizCategory) => (
                     <div key={quizCategory._id} className="p-3 relative">
                       {quizCategory?.postImage && (
                         <div className="">
                           <Image
                             className="rounded-xl "
-                            height={205}
-                            width={245}
+                            height={100}
+                            width={105}
                             src={quizCategory?.postImage}
                             alt=""
                           />
                         </div>
                       )}
 
-                      <p className=" font-bold cursor-pointer absolute  bottom-8 left-8">
+                      {/* <p className=" font-bold cursor-pointer absolute  bottom-8 left-8">
                         {quizCategory?.name}
-                      </p>
+                      </p> */}
                     </div>
                   ))}
                 </div>

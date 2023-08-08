@@ -33,73 +33,78 @@ const Login = () => {
     getUser(email);
   };
   return (
-    <div className="lg:flex  overflow-y-scroll h-full w-[100%]">
-      <div className="bg-red-100 lg:w-[50%] flex flex-col justify-center items-center px-20 lg:py-0 py-10">
-        <div>
-          <p className="">
-            Those people who develop the ability to continuously acquire new and
-            better forms of knowledge that they can apply to their work and to
-            their lives will be the movers and shakers in our society for the
-            indefinite future
-          </p>
-          <p>Brian Tracy</p>
+    <div className="">
+      {/* <div className="bg-white">
+        <Header />
+      </div> */}
+      <div className="lg:flex w-[100%]">
+        <div className="bg-red-100 lg:w-[50%] flex flex-col justify-center items-center px-20 lg:py-0 py-10">
+          <div>
+            <p className="">
+              Those people who develop the ability to continuously acquire new
+              and better forms of knowledge that they can apply to their work
+              and to their lives will be the movers and shakers in our society
+              for the indefinite future
+            </p>
+            <p>Brian Tracy</p>
+          </div>
         </div>
-      </div>
-      <div className="lg:px-20 px-3 lg:w-[50%]">
-        <p className="mt-20">Back To Topify</p>
-        <div className="flex flex-col justify-center items-center gap-10 mt-24">
-          <p className=" lg:text-4xl text-2xl font-bold">Log In</p>
+        <div className="lg:px-20 px-3 lg:w-[50%]">
+          <p className="mt-20">Back To Topify</p>
+          <div className="flex flex-col justify-center items-center gap-10 mt-24">
+            <p className=" lg:text-4xl text-2xl font-bold">Log In</p>
 
-          <form onSubmit={handleSubmit}>
-            <div className="space-y-5">
-              <input
-                type="text"
-                className="lg:w-[400px] w-[350px] py-5 px-5 drop-shadow-2xl  text-gray-900 text-sm rounded-full  "
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <input
-                type="password"
-                className=" lg:w-[400px]  py-5 px-5 drop-shadow-xl  text-gray-900 text-sm rounded-full block w-full p-2.5  "
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <p className="text-red-400">{error}</p>
-              <button
-                onClick={handleSignInButton}
-                type="submit"
-                className="bg-red-400  py-5 px-10 lg:w-[400px] rounded-full block w-full"
-              >
-                Log in
-              </button>
-              {/* <button
+            <form onSubmit={handleSubmit}>
+              <div className="space-y-5">
+                <input
+                  type="text"
+                  className="lg:w-[400px] w-[350px] py-5 px-5 drop-shadow-2xl  text-gray-900 text-sm rounded-full"
+                  placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <input
+                  type="password"
+                  className=" lg:w-[400px]  py-5 px-5 drop-shadow-xl  text-gray-900 text-sm rounded-full block w-full p-2.5  "
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <p className="text-red-400">{error}</p>
+                <button
+                  onClick={handleSignInButton}
+                  type="submit"
+                  className="bg-red-400  py-5 px-10 lg:w-[400px] rounded-full block w-full"
+                >
+                  Log in
+                </button>
+                {/* <button
                 
                 className="bg-red-400  py-5 px-10 lg:w-[400px] rounded-full block w-full"
               >
                 Log in with google
               </button> */}
-              {/* <p onClick={() => addUser()}>addUser</p> */}
-              <div className="flex justify-center">
-                <div className=" cursor-pointer flex  space-x-5">
-                  <BsFacebook size={50} color="#FFAE96" className="mt-1" />
-                  <AiFillGoogleCircle
-                    size={60}
-                    color="#FFAE96"
-                    onClick={handleGoogleSignIn}
-                  />
-                  <AiFillTwitterCircle size={60} color="#FFAE96" />
+                {/* <p onClick={() => addUser()}>addUser</p> */}
+                <div className="flex justify-center">
+                  <div className=" cursor-pointer flex  space-x-5">
+                    <BsFacebook size={50} color="#FFAE96" className="mt-1" />
+                    <AiFillGoogleCircle
+                      size={60}
+                      color="#FFAE96"
+                      onClick={handleGoogleSignIn}
+                    />
+                    <AiFillTwitterCircle size={60} color="#FFAE96" />
+                  </div>
+                </div>
+                <div className="flex justify-center space-x-3">
+                  <p>Dont Have an Account?</p>
+                  <Link className="text-black" href="/register">
+                    <p className="cursor-pointer">Sign Up</p>
+                  </Link>
                 </div>
               </div>
-              <div className="flex justify-center space-x-3">
-                <p>Dont Have an Account?</p>
-                <Link className="text-black" href="/register">
-                  <p className="cursor-pointer">Sign Up</p>
-                </Link>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
