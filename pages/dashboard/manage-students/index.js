@@ -1,7 +1,10 @@
-import React from 'react';
-import DashboardLayout from '../../components/dashboard/layout';
+import { useContext } from 'react';
+import DashboardLayout from '../../../components/dashboard/layout';
+import { AuthContext } from '../../../context/AuthProvider';
 
 const ManageStudents = () => {
+  const { user, information } = useContext(AuthContext);
+  console.log('innnn', information);
   return (
     <DashboardLayout>
       <div className="border border-[#FFAE96] h-100% p-3 lg:p-5 rounded min-h-[100vh]">
@@ -39,7 +42,7 @@ const ManageStudents = () => {
         <div className="grid lg:grid-cols-3 space-y-5 lg:space-y-0 mt-10 mx-5">
           <div className="bg-[#FFF0EF] p-5 rounded-xl lg:w-[200px]">
             <p className="font-bold">Total students</p>
-            <p className="text-2xl text-[#FF6A64]">8</p>
+            <p className="text-2xl text-[#FF6A64]">{information?.length}</p>
           </div>
           <div className="bg-[#FFF0EF] p-5 rounded-xl lg:w-[200px] ">
             <p className="font-bold">Paid Students </p>
@@ -49,6 +52,14 @@ const ManageStudents = () => {
             <p className="font-bold">Certificates Issued</p>
             <p className="text-2xl text-[#FF6A64]">7</p>
           </div>
+        </div>
+        <div>
+          {information?.map((inf) => (
+            <ol className="flex" key={inf._id}>
+              <li>{inf.name}</li>
+              <p>{inf?.lastAnswered?.length}</p>
+            </ol>
+          ))}
         </div>
       </div>
     </DashboardLayout>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Header from '../../../components/shared/Header';
 
 const ReviewQuiz = () => {
   const [data, setData] = useState(null);
@@ -9,6 +10,7 @@ const ReviewQuiz = () => {
   }, []);
   return (
     <div>
+      <Header />
       {data?.questions?.map((question) => (
         <div key={question._id} className=" lg:mx-40 mx-5 my-5  p-5">
           <p>Question: {question?.question}?</p>

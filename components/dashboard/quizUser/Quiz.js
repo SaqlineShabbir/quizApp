@@ -9,17 +9,17 @@ const Quiz = ({ quizCategory }) => {
           <div className="">
             <Image
               className="rounded-xl "
-              height={230}
-              width={255}
+              height={150}
+              width={150}
               src={quizCategory?.postImage}
               alt=""
             />
           </div>
         )}
       </Link>
-      <p className=" font-bold text-sm   cursor-pointer absolute  bottom-11 left-8">
+      {/* <p className=" font-bold text-sm   cursor-pointer absolute  bottom-11 left-8">
         {quizCategory?.name}
-      </p>
+      </p> */}
     </div>
   );
 };

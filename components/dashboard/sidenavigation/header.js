@@ -1,13 +1,18 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useContext } from 'react';
-import logo from '../../../assets/logos/logo.png';
+import logo from '../../../assets/logos/ologo-removebg-preview.png';
 import { ToggleContext } from '../provider/ToggleProvider';
 export default function SidenavHeader() {
   const { open, toggle } = useContext(ToggleContext);
   return (
     <div className="bg-white flex  mb-6 pb-6 pt-3 sticky top-0 z-10">
-      <Image src={logo} width="40" height="30" alt="logo" />
-      <p className="text-2xl font-bold text-orange-500">Quiz Board</p>
+      <Link href="/">
+        <div className="flex  pl-3 cursor-pointer pt-1">
+          <Image src={logo} width="40" height="30" alt="logo" />
+          <p className="text-2xl text-orange-500">ONQUIZ</p>
+        </div>
+      </Link>
       {open == true && (
         <button
           type="button"
