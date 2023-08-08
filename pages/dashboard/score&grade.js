@@ -91,13 +91,8 @@ const ScoreGrade = () => {
           </div>
         </div>
         {/* topics */}
-<<<<<<< HEAD
-        <div className="shadow  my-10 rounded-lg mx-5 py-20">
-          <div className="  flex px-7  space-x-12">
-=======
         <div className="shadow-lg my-20 rounded-lg border mx-5">
           <div className="  flex px-7  py-10  space-x-12">
->>>>>>> b1e6fc16595800e2dace887e876885452aca4002
             <div className="py-5">
               <p className="text-lg pb-4 ">Quiz Topics</p>
               <div className="space-y-2">
