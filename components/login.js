@@ -43,7 +43,7 @@ const Login = () => {
               and to their lives will be the movers and shakers in our society
               for the indefinite future
             </p>
-            <p>Brian Tracy</p>
+            <p className="">- Brian Tracy</p>
           </div>
         </div>
         <div className="lg:px-20 px-3 lg:w-[50%]">
@@ -55,14 +55,14 @@ const Login = () => {
               <div className="space-y-5">
                 <input
                   type="text"
-                  className="lg:w-[400px] w-[350px] py-5 px-5   text-gray-900 text-sm rounded-full"
+                  className="lg:w-[400px] w-[350px] py-5 px-5   text-gray-900 text-sm rounded-full border"
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
                 <input
                   type="password"
-                  className=" lg:w-[400px]  py-5 px-5   text-gray-900 text-sm rounded-full block w-full p-2.5  "
+                  className=" lg:w-[400px]  py-5 px-5   text-gray-900 text-sm rounded-full block w-full p-2.5 border "
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                   required

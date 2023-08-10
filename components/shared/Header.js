@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useContext, useState } from 'react';
@@ -7,6 +8,7 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useContext(AuthContext);
   console.log(user?.email);
+  const verify = Cookies.get('loggedin');
   return (
     <header className=" text-white p-4 ">
       <div className="container mx-auto flex items-center justify-between lg:px-[55px] text-black relative">
@@ -52,7 +54,7 @@ function Header() {
             </Link>
           </div>
           <br />
-          {!user?.email && (
+          {!verify && (
             <div className="lg:mx-5">
               <Link
                 href="/sign-in"
@@ -63,7 +65,7 @@ function Header() {
             </div>
           )}
           <br />
-          <div className="px-5">
+          <div className="">
             <Link
               href="/dashboard"
               className="block md:inline-block mt-4 md:mt-0 md:mr-6 text-black-400 hover-text-black-100 "
