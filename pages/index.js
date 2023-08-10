@@ -8,15 +8,8 @@ export default function Main() {
   const [loggedInUser, setLoggedInUser] = useState(false);
   const { user } = useContext(AuthContext);
 
-  //
-  // On your about page for example
-  // useEffect(() => {
-  //   document.documentElement.style.overflow = 'auto';
-  //   document.body.style.overflow = 'scroll';
-  // }, []);
-
   return (
-    <div className=" bg-gray-100 overflow-auto">
+    <div className=" bg-gray-100 ">
       {user?.email ? (
         <div>
           <Head>

@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
-import React, { createContext, useState } from "react";
+import { useRouter } from 'next/router';
+import React, { createContext, useState } from 'react';
 
 export const ToggleContext = createContext();
 
@@ -12,19 +12,19 @@ export function ToggleProvider({ children }) {
   }
 
   // set the html tag style overflow to hidden
-  React.useEffect(() => {
-    document.documentElement.style.overflow = "hidden";
-  }, []);
+  // React.useEffect(() => {
+  //   document.documentElement.style.overflow = "hidden";
+  // }, []);
 
   // close side navigation when route changes
   React.useEffect(() => {
     if (open) {
-      router.events.on("routeChangeStart", () => setOpen(false));
+      router.events.on('routeChangeStart', () => setOpen(false));
     }
 
     return () => {
       if (open) {
-        router.events.off("routeChangeStart", () => setOpen(false));
+        router.events.off('routeChangeStart', () => setOpen(false));
       }
     };
   }, [open, router]);

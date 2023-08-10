@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import img from '../../assets/logos/ologo-removebg-preview.png';
+import { AuthContext } from '../../context/AuthProvider';
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { user } = useContext(AuthContext);
+  console.log(user?.email);
   return (
     <header className=" text-white p-4 ">
       <div className="container mx-auto flex items-center justify-between lg:px-[55px] text-black relative">
@@ -50,16 +52,18 @@ function Header() {
             </Link>
           </div>
           <br />
-          <div className="lg:mx-5">
-            <Link
-              href="/sign-in"
-              className="block md:inline-block  md:mt-0 mr-7"
-            >
-              LOGIN
-            </Link>
-          </div>
+          {!user?.email && (
+            <div className="lg:mx-5">
+              <Link
+                href="/sign-in"
+                className="block md:inline-block  md:mt-0 mr-7"
+              >
+                LOGIN
+              </Link>
+            </div>
+          )}
           <br />
-          <div>
+          <div className="px-5">
             <Link
               href="/dashboard"
               className="block md:inline-block mt-4 md:mt-0 md:mr-6 text-black-400 hover-text-black-100 "
@@ -68,14 +72,14 @@ function Header() {
             </Link>
           </div>
           <br />
-          <div className="lg:mx-5">
+          {/* <div className="lg:mx-5">
             <Link
               href="/contact"
               className="block md:inline-block mt-4 md:mt-0 text-black-500 "
             >
               CONTACT
             </Link>
-          </div>
+          </div> */}
         </nav>
       </div>
     </header>

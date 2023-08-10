@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useContext, useState } from 'react';
+import Header from '../components/shared/Header';
 import { AuthContext } from '../context/AuthProvider';
 const Register = () => {
   const [name, setName] = useState('');
@@ -27,9 +28,10 @@ const Register = () => {
   };
 
   return (
-    <div className="h-[2000px] overflow-auto">
+    <div className="">
+      <Header />
       <div className="lg:flex w-[100%]">
-        <div className="bg-red-100 lg:w-[50%] flex flex-col justify-center items-center px-20 lg:py-0 py-10 ">
+        <div className=" lg:w-[50%] flex flex-col justify-center items-center px-20 lg:py-0 py-10 ">
           <div className=" ">
             <div className="space-y-5">
               <p className="">
@@ -43,38 +45,47 @@ const Register = () => {
           </div>
         </div>
         <div className="lg:px-20 px-3 lg:w-[50%] ">
-          <p className="mt-20">Back To Topify</p>
+          {/* <p className="mt-10">Back To Topify</p> */}
           <div className="flex flex-col justify-center items-center gap-10 mt-10">
             <p className="flex  items-center lg:text-4xl text-2xl font-bold">
               Sign Up
             </p>
 
-            <form onSubmit={handleSubmit}>
-              <div className="space-y-5">
+            <form onSubmit={handleSubmit} className="">
+              <div className="space-y-5 flex flex-col justify-center  items-center">
+                {/* <input
+                  type="text"
+                  className="lg:w-[400px] w-[350px] py-5 px-5   text-gray-900 text-sm rounded-full  "
+                  placeholder="Full Name"
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                /> */}
+
                 <input
                   type="text"
-                  className="lg:w-[400px] w-[350px] py-5 px-5 drop-shadow-2xl  text-gray-900 text-sm rounded-full  "
+                  className="lg:w-[400px] border w-[350px]  py-5 px-5   text-gray-900 text-sm rounded-full  "
                   placeholder="Full Name"
                   onChange={(e) => setName(e.target.value)}
                   required
                 />
+
                 <input
                   type="email"
-                  className="lg:w-[400px]  w-[350px]  py-5 px-5 drop-shadow-2xl  text-gray-900 text-sm rounded-full  "
+                  className="lg:w-[400px] border w-[350px]  py-5 px-5   text-gray-900 text-sm rounded-full  "
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
                 <input
                   type="password"
-                  className=" lg:w-[400px]  py-5 px-5 drop-shadow-xl  text-gray-900 text-sm rounded-full block w-full p-2.5  "
+                  className=" lg:w-[400px] border  w-[350px] py-5 px-5  text-gray-900 text-sm rounded-full block p-2.5  "
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
                 <input
                   type="password"
-                  className=" lg:w-[400px]  py-5 px-5 drop-shadow-xl  text-gray-900 text-sm rounded-full block w-full p-2.5  "
+                  className=" lg:w-[400px]  py-5 px-5 border text-gray-900 text-sm rounded-full block w-[350px] p-2.5  "
                   placeholder="Confirm Password"
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
@@ -82,12 +93,16 @@ const Register = () => {
                 <p className="text-red-500">{error}</p>
                 <button
                   type="submit"
-                  className="bg-red-400  py-5 px-10 lg:w-[400px] rounded-full block w-full"
+                  className="bg-red-400 border py-5 px-10 w-[350px] lg:w-[400px] rounded-full block "
                 >
                   Sign Up
                 </button>
-                <p>Already have an account? </p>
-                <Link href="/">Log In</Link>
+                <div className="flex">
+                  <p>Already have an account? </p>
+                  <div className="text-blue-600 pl-3  px-5">
+                    <Link href="/sign-in">Log In</Link>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
