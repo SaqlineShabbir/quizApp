@@ -49,7 +49,7 @@ function Header() {
           } md:flex `}
         >
           <div>
-            <Link href="/" className="block md:inline-block  md:mt-0  ">
+            <Link href="/" className="block mx-5 md:inline-block  md:mt-0  ">
               HOME
             </Link>
           </div>
@@ -65,7 +65,7 @@ function Header() {
             </div>
           )}
           <br />
-          <div className="">
+          <div className="mx-5">
             <Link
               href="/dashboard"
               className="block md:inline-block mt-4 md:mt-0 md:mr-6 text-black-400 hover-text-black-100 "
