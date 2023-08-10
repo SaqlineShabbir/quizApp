@@ -45,8 +45,8 @@ const DashBoard = ({ categoryData }) => {
                   </div>
                 </div>
 
-                <div className=" px-5 rounded-lg pb-5 border">
-                  <div className="mt-10 w-[100%]">
+                <div className=" px-5 rounded-lg pb-5 border lg:w-[900px]">
+                  <div className="mt-10 ">
                     <p className="font-bold">Quiz Topics</p>
                     <div className="flex mt-3 pb-3 my-20">
                       <div className="space-y-2  ">
@@ -71,7 +71,7 @@ const DashBoard = ({ categoryData }) => {
 
               {/* //quiz categoryes */}
 
-              <div className="w-1/2 lg:my-0 my-8">
+              {/* <div className="w-1/2 lg:my-0 my-8">
                 <div>
                   <p className="font-bold">Featured Quiz Categories</p>
                 </div>
@@ -90,13 +90,11 @@ const DashBoard = ({ categoryData }) => {
                         </div>
                       )}
 
-                      {/* <p className=" font-bold cursor-pointer absolute  bottom-8 left-8">
-                        {quizCategory?.name}
-                      </p> */}
+                     
                     </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

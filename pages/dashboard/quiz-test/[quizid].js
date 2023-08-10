@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import React from 'react';
-import img from '../../../assets/images/Cap.PNG';
 import DashboardLayout from '../../../components/dashboard/layout';
 
 const QuizDetails = ({ categoryData }) => {
@@ -11,7 +10,7 @@ const QuizDetails = ({ categoryData }) => {
   const quizId = router.query.quizid;
 
   const singleQuiz = categoryData.find((q) => q._id === quizId);
-
+  console.log(singleQuiz);
   return (
     <DashboardLayout>
       <div className="border border-[#FFAE96] h-100% p-3 lg:p-5 rounded">
@@ -20,13 +19,13 @@ const QuizDetails = ({ categoryData }) => {
             className="rounded "
             height={150}
             width={202}
-            src={img}
+            src={singleQuiz?.postImage}
             alt=""
           />
-          <div className="ml-5">
+          <div className="ml-5 pt-5">
             <p className="text-3xl">{singleQuiz?.name} Certification test</p>
             <p>Read the following instructions carefully</p>
-            <p className="text-[#F24E1E]">0 People Participated in this test</p>
+            {/* <p className="text-[#F24E1E]">0 People Participated in this test</p> */}
           </div>
         </div>
         {/* //cards */}

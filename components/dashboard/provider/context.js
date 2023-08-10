@@ -1,5 +1,5 @@
-import React from 'react';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 // create new context
 const Context = React.createContext({});
@@ -14,9 +14,6 @@ export default function DashboardProvider({ children }) {
   }, []);
 
   // set the html tag style overflow to hidden
-  React.useEffect(() => {
-    document.documentElement.style.overflow = 'hidden';
-  }, []);
 
   // close side navigation when route changes
   React.useEffect(() => {

@@ -11,11 +11,6 @@ export function ToggleProvider({ children }) {
     setOpen(!open);
   }
 
-  // set the html tag style overflow to hidden
-  // React.useEffect(() => {
-  //   document.documentElement.style.overflow = "hidden";
-  // }, []);
-
   // close side navigation when route changes
   React.useEffect(() => {
     if (open) {
