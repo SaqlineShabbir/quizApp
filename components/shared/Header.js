@@ -7,7 +7,7 @@ import { AuthContext } from '../../context/AuthProvider';
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useContext(AuthContext);
-  console.log(user?.email);
+
   const verify = Cookies.get('loggedin');
   return (
     <header className=" text-white p-4 ">

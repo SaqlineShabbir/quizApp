@@ -14,7 +14,7 @@ const DashBoard = ({ categoryData }) => {
   return (
     <>
       <DashboardLayout>
-        <div className="border border-[#FFAE96] h-100% p-3 lg:p-5 rounded  ">
+        <div className="border border-[#FFAE96] min-h-[100vh] p-3 lg:p-5 rounded  ">
           <div className="flex">
             <div className="pr-2">
               {user?.photoURL && (
