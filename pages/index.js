@@ -8,8 +8,15 @@ export default function Main() {
   const [loggedInUser, setLoggedInUser] = useState(false);
   const { user } = useContext(AuthContext);
 
+  //
+  // On your about page for example
+  // useEffect(() => {
+  //   document.documentElement.style.overflow = 'auto';
+  //   document.body.style.overflow = 'scroll';
+  // }, []);
+
   return (
-    <div className="  bg-gray-100 h-screen overflow-hidden">
+    <div className=" bg-gray-100 overflow-auto">
       {user?.email ? (
         <div>
           <Head>
@@ -18,7 +25,7 @@ export default function Main() {
             <link rel="icon" href="/favicon.ico" />
           </Head>
 
-          <main className="h-screen overflow-y-scroll">
+          <main className="">
             <div className=" ">
               <Home />
             </div>

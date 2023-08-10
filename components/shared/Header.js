@@ -6,8 +6,8 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className=" text-white p-4">
-      <div className="container mx-auto flex items-center justify-between lg:px-[55px] text-black">
+    <header className=" text-white p-4 ">
+      <div className="container mx-auto flex items-center justify-between lg:px-[55px] text-black relative">
         <Link href="/" className="font-semibold text-xl">
           <div className="flex">
             <Image

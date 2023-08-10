@@ -93,13 +93,6 @@ const Register = () => {
           </div>
         </div>
       </div>
-
-      <div>hello</div>
-      <div>hello</div>
-      <div>hello</div>
-      <div>hello</div>
-      <div>hello</div>
-      <div>hello</div>
     </div>
   );
 };
