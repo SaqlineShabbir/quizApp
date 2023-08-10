@@ -5,6 +5,7 @@ import { AiFillGoogleCircle, AiFillTwitterCircle } from 'react-icons/ai';
 import { BsFacebook } from 'react-icons/bs';
 
 import { AuthContext } from '../context/AuthProvider';
+import Header from './shared/Header';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,7 +35,8 @@ const Login = () => {
   };
   return (
     <div className="">
-      <div className="lg:flex w-[100%]">
+      <Header />
+      <div className="lg:flex w-[100%] min-h-[100vh]">
         <div className=" lg:w-[50%] flex flex-col justify-center items-center px-5 lg:px-20 lg:py-0 py-10">
           <div>
             <p className="">
