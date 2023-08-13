@@ -49,24 +49,35 @@ const Footer = () => {
           <div className="space-y-2">
             <p className="text-white">ABOUT</p>
             <button className="text-gray-300 text-sm ">ABOUT US</button>
+            <br />
             <button className="text-gray-300 text-sm ">LEARNER STORIES</button>
+            <br />
             <button className="text-gray-300 text-sm ">CAREERS</button>
+            <br />
             <button className="text-gray-300 text-sm ">PRESS</button>
+            <br />
             <button className="text-gray-300 text-sm ">LEADERSHIP</button>
+            <br />
             <button className="text-gray-300 text-sm ">CONTACT US</button>
           </div>
           <div className="space-y-2">
             <p className="text-white">ONE PAGES</p>
             <button className="text-gray-300 text-sm ">DEVELOPMENT</button>
+            <br />
             <button className="text-gray-300 text-sm ">BUSINESS</button>
+            <br />
             <button className="text-gray-300 text-sm ">
               FINANCE & ACCOUNT
             </button>
+            <br />
             <button className="text-gray-300 text-sm ">IT &SOFTWARE</button>
+            <br />
             <button className="text-gray-300 text-sm ">
               OFFICE PRODUCTIVITY
             </button>
+            <br />
             <button className="text-gray-300 text-sm ">DESIGN</button>
+            <br />
             <button className="text-gray-300 text-sm ">MARKETING</button>
           </div>
           <div className="space-y-2">
@@ -83,7 +94,9 @@ const Footer = () => {
           <div className="space-y-2">
             <p className="text-white">BLOG</p>
             <button className="text-gray-300 text-sm ">JOB OPENING</button>
+            <br />
             <button className="text-gray-300 text-sm ">INTERNSHIP</button>
+            <br />
             <button className="text-gray-300 text-sm ">PROMOTE JOB</button>
           </div>
         </div>

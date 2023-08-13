@@ -19,7 +19,7 @@ export default function Main() {
           </Head>
 
           <main className="">
-            <div className=" ">
+            <div className="">
               <Home />
             </div>
           </main>

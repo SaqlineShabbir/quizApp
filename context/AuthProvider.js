@@ -4,7 +4,6 @@ import {
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
-  sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -34,7 +33,7 @@ const AuthProvider = ({ children }) => {
       const newUser = { email, displayName: name };
       setUser(newUser);
 
-      verifyEmail();
+      // verifyEmail();
       //saving user to backend
       saveUser(name, email);
       //getting user
@@ -90,11 +89,11 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
   //verify email
-  const verifyEmail = () => {
-    sendEmailVerification(auth.currentUser).then(() => {
-      alert('please check email and verify');
-    });
-  };
+  // const verifyEmail = () => {
+  //   sendEmailVerification(auth.currentUser).then(() => {
+  //     alert('please check email and verify');
+  //   });
+  // };
 
   //observe  user
   useEffect(() => {
