@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
-import { AiFillGoogleCircle, AiFillTwitterCircle } from 'react-icons/ai';
-import { BsFacebook } from 'react-icons/bs';
+import { AiFillGoogleCircle } from 'react-icons/ai';
 
 import { AuthContext } from '../context/AuthProvider';
 import Header from './shared/Header';
@@ -85,23 +84,27 @@ const Login = () => {
               </button> */}
                 {/* <p onClick={() => addUser()}>addUser</p> */}
                 <div className="flex justify-center">
-                  <div className="  flex  space-x-5">
-                    <BsFacebook
+                  <div className=" flex flex-col items-center text-center  space-x-5">
+                    {/* <BsFacebook
                       size={50}
                       color="#FFAE96"
                       className="mt-1 cursor-pointer"
-                    />
+                    /> */}
                     <AiFillGoogleCircle
                       size={60}
                       color="#FFAE96"
                       onClick={handleGoogleSignIn}
                       className="cursor-pointer"
                     />
-                    <AiFillTwitterCircle
+                    {/* <AiFillTwitterCircle
                       size={60}
                       color="#FFAE96"
                       className="cursor-pointer"
-                    />
+                    /> */}
+                    <div className="border p-5">
+                      <p>testone@gmail.com</p>
+                      <p>123456</p>
+                    </div>
                   </div>
                 </div>
                 <div className="flex justify-center space-x-3">
