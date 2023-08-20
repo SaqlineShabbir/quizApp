@@ -65,14 +65,16 @@ function Header() {
             </div>
           )}
           <br />
-          <div className="mx-5">
-            <Link
-              href="/dashboard"
-              className="block md:inline-block mt-4 md:mt-0 md:mr-6 text-black-400 hover-text-black-100 "
-            >
-              DASHBOARD
-            </Link>
-          </div>
+          {verify && (
+            <div className="mx-5">
+              <Link
+                href="/dashboard"
+                className="block md:inline-block mt-4 md:mt-0 md:mr-6 text-black-400 hover-text-black-100 "
+              >
+                DASHBOARD
+              </Link>
+            </div>
+          )}
           <br />
           {/* <div className="lg:mx-5">
             <Link
